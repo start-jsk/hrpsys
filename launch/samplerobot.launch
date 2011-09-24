@@ -1,5 +1,0 @@
-<launch>
-  <include file="$(find hrpsys)/launch/hrpsys.launch">
-    <arg name="MODEL_FILE" value="$(find hrpsys)/scripts/SampleRobot_inHouse.xml" />
-  </include>
-</launch>

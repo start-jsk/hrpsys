@@ -1,5 +1,0 @@
-<launch>
-  <include file="$(find hrpsys)/launch/hrpsys.launch">
-    <arg name="MODEL_FILE" value="$(env CVSDIR)/OpenHRP2/etc/DARWIN/DARWINmain.wrl" />
-  </include>
-</launch>
