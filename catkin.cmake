@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(hrpsys)
 # Load catkin and all dependencies required for this package
 # TODO: remove all from COMPONENTS that are not catkin packages.
-find_package(catkin REQUIRED COMPONENTS)
+find_package(catkin REQUIRED COMPONENTS openhrp3)
 
 # include_directories(include ${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS})
 # CATKIN_MIGRATION: removed during catkin migration
@@ -69,8 +69,8 @@ catkin_python_setup()
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
     DEPENDS hrpsys_tools openhrp3 jython libxml2 sdl opencv2 libqhull libglew-dev libirrlicht-dev boost doxygen
-    CATKIN-DEPENDS # TODO
-    INCLUDE_DIRS # TODO include
+    CATKIN-DEPENDS openhrp3
+    INCLUDE_DIRS include
     LIBRARIES # TODO
 )
 
