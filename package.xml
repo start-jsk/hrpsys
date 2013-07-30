@@ -1,0 +1,24 @@
+<package>
+  <name>hrpsys</name>
+  <version>3.1.4</version>
+  <description>
+  Basic RT components and utilities to control robots using OpenRTM
+  </description>
+
+  <license>EPL</license>
+  <maintainer email="k-okada@jsk.t.u-tokyo.ac.jp">Kei Okada</maintainer>
+
+  <url type="website">https://code.google.com/p/hrpsys-base/</url>
+  <url type="bugtracker">https://code.google.com/p/hrpsys-base/issues/list</url>
+
+  <author>AIST</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>openhrp3</build_depend>
+  <run_depend>openhrp3</run_depend>
+  <!-- <test_depend>openhrp3</test_depend> -->
+
+  <export>
+    <python path="${prefix}/lib/python2.7/dist-packages"/>
+  </export>
+</package>
