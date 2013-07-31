@@ -20,12 +20,12 @@ find_package(catkin REQUIRED COMPONENTS openhrp3)
 #  MinSizeRel     : w/o debug symbols, w/ optimization, stripped binaries
 #set(ROS_BUILD_TYPE RelWithDebInfo)
 
+find_package(openrtm_aist REQUIRED)
 # Build hrpsys before rtmbuild_init
-execute_process(COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base
-                RESULT_VARIABLE _make_failed)
-if (_make_failed)
-  message(FATAL_ERROR "Build of hrpsys failed")
-endif(_make_failed)
+add_custom_command(OUTPUT ${PROJECT_SOURCE_DIR}/installed
+   COMMAND PKG_CONFIG_PATH=${CATKIN_DEVEL_PREFIX}/lib/pkgconfig OPENRTM_DIR=${openrtm_aist_SOURCE_PREFIX} cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base
+)
+add_custom_target(COMPILE_hrpsys ALL DEPENDS ${PROJECT_SOURCE_DIR}/installed)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
