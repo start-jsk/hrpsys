@@ -7,11 +7,11 @@
 
   <license>EPL</license>
   <maintainer email="k-okada@jsk.t.u-tokyo.ac.jp">Kei Okada</maintainer>
+  <maintainer email="iisaito@kinugarage.com">Isao Isaac Saito</maintainer>
+  <author>AIST</author>
 
   <url type="website">https://code.google.com/p/hrpsys-base/</url>
   <url type="bugtracker">https://code.google.com/p/hrpsys-base/issues/list</url>
-
-  <author>AIST</author>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>openhrp3</build_depend>
