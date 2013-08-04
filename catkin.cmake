@@ -88,9 +88,19 @@ install(DIRECTORY bin
   DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${PROJECT_NAME}
   USE_SOURCE_PERMISSIONS  # set executable
 )
-install(DIRECTORY lib
-  DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-)
+# libhrpsysUtil.so go to lib, plugins ges to share/hrpsys/lib
+file(GLOB lib_files RELATIVE "${PROJECT_SOURCE_DIR}/lib" "lib/*")
+foreach(_file ${lib_files})
+  if(EXISTS "${PROJECT_SOURCE_DIR}/lib/${_file}/") # check if directory
+    install(DIRECTORY lib/${_file} DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+  elseif(${_file} STREQUAL "libhrpsysUtil.so" OR
+         ${_file} STREQUAL "libhrpsysBaseStub.so")
+    install(FILES lib/${_file} DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+  else()
+    install(FILES lib/${_file} DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/lib)
+  endif()
+endforeach()
+
 install(DIRECTORY include
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
