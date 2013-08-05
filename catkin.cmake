@@ -2,13 +2,16 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(hrpsys)
 
+# Load catkin and all dependencies required for this package
+# TODO: remove all from COMPONENTS that are not catkin packages.
+find_package(catkin REQUIRED COMPONENTS openhrp3)
+
+
 # Build hrpsys
 #find_package(openrtm_aist REQUIRED) # do not call find_package
 #set(ENV{OPENRTM_DIR} ${openrtm_aist_SOURCE_PREFIX})
 set(ENV{PKG_CONFIG_PATH} ${CATKIN_DEVEL_PREFIX}/lib/pkgconfig)
-#set(ENV{OPENRTM_DIR} ${CMAKE_SOURCE_DIR}/openrtm_aist)
-set(ENV{OPENRTM_DIR} ${CMAKE_SOURCE_DIR}/openrtm_common/openrtm_aist) # Option 1
-#set(ENV{OPENRTM_DIR} `rospack find openrtm_aist`)                    # Option 2
+set(ENV{OPENRTM_DIR} ${openrtm_aist_SOURCE_DIR})
 execute_process(COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base
                 RESULT_VARIABLE _make_failed)
 if (_make_failed)
@@ -18,10 +21,6 @@ endif(_make_failed)
 ##
 ##
 
-
-# Load catkin and all dependencies required for this package
-# TODO: remove all from COMPONENTS that are not catkin packages.
-find_package(catkin REQUIRED COMPONENTS openhrp3)
 
 # include_directories(include ${Boost_INCLUDE_DIR} ${catkin_INCLUDE_DIRS})
 # CATKIN_MIGRATION: removed during catkin migration
