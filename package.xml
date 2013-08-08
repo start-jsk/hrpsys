@@ -14,8 +14,25 @@
   <url type="bugtracker">https://code.google.com/p/hrpsys-base/issues/list</url>
 
   <buildtool_depend>catkin</buildtool_depend>
+
   <build_depend>openhrp3</build_depend>
+
+  <build_depend>doxygen</build_depend>
+  <build_depend>libglew-dev</build_depend>
+  <build_depend>libirrlicht-dev</build_depend>
+  <build_depend>libqhull</build_depend>
+  <build_depend>libxml2</build_depend>
+  <build_depend>opencv2</build_depend>
+  <build_depend>sdl</build_depend>
+
   <run_depend>openhrp3</run_depend>
+
+  <run_depend>libirrlicht-dev</run_depend>
+  <run_depend>libqhull</run_depend>
+  <run_depend>libxml2</run_depend>
+  <run_depend>opencv2</run_depend>
+  <run_depend>sdl</run_depend>
+
   <!-- <test_depend>openhrp3</test_depend> -->
 
   <export>
