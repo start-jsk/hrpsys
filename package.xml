@@ -10,8 +10,9 @@
   <maintainer email="iisaito@kinugarage.com">Isao Isaac Saito</maintainer>
   <author>AIST</author>
 
-  <url type="website">https://code.google.com/p/hrpsys-base/</url>
-  <url type="bugtracker">https://code.google.com/p/hrpsys-base/issues/list</url>
+  <url type="website">http://ros.org/wiki/hrpsys</url>
+  <url type="repository">https://code.google.com/p/hrpsys-base</url>
+  <url type="bugtracker">https://code.google.com/p/hrpsys-base/issues</url>
 
   <buildtool_depend>catkin</buildtool_depend>
 
