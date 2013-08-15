@@ -8,15 +8,13 @@ find_package(catkin REQUIRED COMPONENTS openhrp3)
 
 
 # Build hrpsys
-#find_package(openrtm_aist REQUIRED) # do not call find_package
-#set(ENV{OPENRTM_DIR} ${openrtm_aist_SOURCE_PREFIX})
-set(ENV{PKG_CONFIG_PATH} ${CATKIN_DEVEL_PREFIX}/lib/pkgconfig)
-set(ENV{OPENRTM_DIR} ${openrtm_aist_SOURCE_DIR})
-execute_process(COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base
-                RESULT_VARIABLE _make_failed)
-if (_make_failed)
-  message(FATAL_ERROR "Build of hrpsys-base failed")
-endif(_make_failed)
+add_custom_command(
+  OUTPUT ${PROJECT_SOURCE_DIR}/installed
+  #COMMAND PATH=${openrtm_aist_PREFIX}/lib/openrtm_aist/bin:$PATH OPENRTM_DIR=${openrtm_aist_SOURCE_DIR}aa cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base installed
+  COMMAND PATH=${openrtm_aist_PREFIX}/lib/openrtm_aist/bin:$ENV{PATH} PKG_CONFIG_PATH=${openhrp3_SOURCE_DIR}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH} cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base installed
+  DEPENDS ${PROJECT_SOURCE_DIR}/Makefile.hrpsys-base
+  )
+add_custom_target(compile_hrpsys ALL DEPENDS compile_openhrp3 ${PROJECT_SOURCE_DIR}/installed)
 
 ##
 ##
