@@ -2,7 +2,7 @@
   <name>hrpsys</name>
   <version>3.1.5</version>
   <description>
-  Basic RT components and utilities to control robots using OpenRTM
+    <p>Basic RT components and utilities to control robots using OpenRTM.</p>
   </description>
 
   <license>EPL</license>
@@ -26,12 +26,11 @@
   <build_depend>opencv2</build_depend>
   <build_depend>sdl</build_depend>
 
-  <run_depend>openhrp3</run_depend>
-
   <run_depend>libirrlicht-dev</run_depend>
   <run_depend>libqhull</run_depend>
   <run_depend>libxml2</run_depend>
   <run_depend>opencv2</run_depend>
+  <run_depend>openhrp3</run_depend>
   <run_depend>sdl</run_depend>
 
   <!-- <test_depend>openhrp3</test_depend> -->
