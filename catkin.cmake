@@ -75,6 +75,12 @@ catkin_python_setup()
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
+
+# BEGIN fake catkin_package to work around the issue http://code.google.com/p/rtm-ros-robotics/issues/detail?id=162
+file(MAKE_DIRECTORY include/openrtm-1.1) 
+file(MAKE_DIRECTORY include/openrtm-1.1/rtm/idl)
+# END fake catkin_package
+
 catkin_package(
     DEPENDS jython libxml2 sdl opencv2 libqhull libglew-dev libirrlicht-dev boost doxygen
     CATKIN-DEPENDS openhrp3
