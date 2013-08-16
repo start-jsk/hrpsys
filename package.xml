@@ -1,8 +1,10 @@
 <package>
   <name>hrpsys</name>
-  <version>3.1.4</version>
+  <version>0.0.1</version>
   <description>
-  Basic RT components and utilities to control robots using OpenRTM
+   <p>Basic RT components and utilities to control robots using OpenRTM.</p>
+
+   <p>Real version number, 3.1.4, is kept back until this discussion (http://code.google.com/p/rtm-ros-robotics/issues/detail?id=159) resolves. </p>
   </description>
 
   <license>EPL</license>
