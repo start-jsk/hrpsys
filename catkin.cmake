@@ -11,10 +11,16 @@ find_package(catkin REQUIRED COMPONENTS openhrp3)
 add_custom_command(
   OUTPUT ${PROJECT_SOURCE_DIR}/installed
   #COMMAND PATH=${openrtm_aist_PREFIX}/lib/openrtm_aist/bin:$PATH OPENRTM_DIR=${openrtm_aist_SOURCE_DIR}aa cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base installed
-  COMMAND PATH=${openrtm_aist_PREFIX}/lib/openrtm_aist/bin:$ENV{PATH} PKG_CONFIG_PATH=${openhrp3_SOURCE_DIR}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH} cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base installed
+  COMMAND PATH=${openrtm_aist_PREFIX}/lib/openrtm_aist/bin:$ENV{PATH} PKG_CONFIG_PATH=${openhrp3_SOURCE_DIR}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH} OPENRTM_DIR=${openrtm_aist_PREFIX}/lib/openrtm_aist cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base installed
   DEPENDS ${PROJECT_SOURCE_DIR}/Makefile.hrpsys-base
   )
-add_custom_target(compile_hrpsys ALL DEPENDS compile_openhrp3 ${PROJECT_SOURCE_DIR}/installed)
+
+# wait for openhrp3 compile
+if(TARGET compile_openhrp3)
+  add_custom_target(compile_hrpsys ALL DEPENDS ${PROJECT_SOURCE_DIR}/installed compile_openhrp3)
+else()
+  add_custom_target(compile_hrpsys ALL DEPENDS ${PROJECT_SOURCE_DIR}/installed)
+endif()
 
 ##
 ##
