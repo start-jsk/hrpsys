@@ -11,7 +11,7 @@ pkg_check_modules(openrtm_aist openrtm-aist REQUIRED)
 set(OPENRTM_DIR ${openrtm_aist_PREFIX}/lib/openrtm_aist)
 set(ENV{PKG_CONFIG_PATH} $ENV{PKG_CONFIG_PATH}:${CATKIN_DEVEL_PREFIX}/lib/pkgconfig)
 execute_process(
-  COMMAND sh -c "test -e ${CATKIN_DEVEL_PREFIX}/share/hrpsys/ || rm -f ${PROJECT_SOURCE_DIR}/installed"
+  COMMAND sh -c "test -e ${CATKIN_DEVEL_PREFIX}/share/hrpsys/ || rm -f ${PROJECT_SOURCE_DIR}/installed ${PROJECT_SOURCE_DIR}/build/hrpsys-base/CMakeCache.txt"
   COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base OPENRTM_DIR=${OPENRTM_DIR} installed
                 RESULT_VARIABLE _make_failed)
 if (_make_failed)
@@ -33,23 +33,38 @@ catkin_package(
 )
 
 
-install(DIRECTORY bin
+install(DIRECTORY bin/
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
   USE_SOURCE_PERMISSIONS  # set executable
 )
 
 install(DIRECTORY lib/
   DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  FILES_MATCHING
+  PATTERN "lib*.so"
+  PATTERN "*.py"
+  PATTERN "*.pyc"
+  PATTERN "hrpsys-base.pc"
+)
+#install(CODE
+#  "execute_process(COMMAND \"cp lib/* ${CATKIN_PACKAGE_SHARE_DESTINATION}/lib\")"
+#)
+
+install(DIRECTORY lib/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/lib
+  PATTERN "lib*.so" EXCLUDE
+  PATTERN "*.py" EXCLUDE
+  PATTERN "*.pyc" EXCLUDE
+  PATTERN "hrpsys-base.pc" EXCLUDE
 )
 install(DIRECTORY include
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
 )
-install(DIRECTORY share
+install(DIRECTORY share/hrpsys/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
 install(CODE
   "execute_process(COMMAND echo \"fix hrpsys-base.pc ${CATKIN_DEVEL_PREFIX} -> ${CMAKE_INSTALL_PREFIX}\")
    execute_process(COMMAND sed -i s@${CATKIN_DEVEL_PREFIX}@${CMAKE_INSTALL_PREFIX}@g \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/lib/pkgconfig/hrpsys-base.pc) # basic
-   execute_process(COMMAND sed -i s@{prefix}/include@{prefix}/include/${PROJECT_NAME}/include@g \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/lib/pkgconfig/hrpsys-base.pc) # for --libs
 ")
