@@ -12,6 +12,8 @@ set(OPENRTM_DIR ${openrtm_aist_PREFIX}/lib/openrtm_aist)
 set(ENV{PKG_CONFIG_PATH} $ENV{PKG_CONFIG_PATH}:${CATKIN_DEVEL_PREFIX}/lib/pkgconfig)
 execute_process(
   COMMAND sh -c "test -e ${CATKIN_DEVEL_PREFIX}/share/hrpsys/ || rm -f ${PROJECT_SOURCE_DIR}/installed ${PROJECT_SOURCE_DIR}/build/hrpsys-base/CMakeCache.txt"
+  COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base OPENRTM_DIR=${OPENRTM_DIR} INSTALL_DIR=${CATKIN_DEVEL_PREFIX} build/hrpsys-base-source
+  COMMAND sed -i s@{OPENHRP_DIR}/share/OpenHRP-3.1/idl/@{OPENHRP_DIR}/share/openhrp3/share/OpenHRP-3.1/idl/@ ${PROJECT_SOURCE_DIR}/build/hrpsys-base-source/idl/CMakeLists.txt
   COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base OPENRTM_DIR=${OPENRTM_DIR} INSTALL_DIR=${CATKIN_DEVEL_PREFIX} installed
                 RESULT_VARIABLE _make_failed)
 if (_make_failed)
@@ -19,14 +21,14 @@ if (_make_failed)
 endif(_make_failed)
 
 # binary files intentionally goes to ${CATKIN_PACKAGE_BIN_DESTINATION}/lib
-execute_process(
-  COMMAND sh -c "test -e ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME} || (mkdir -p ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME}; mv ${CATKIN_DEVEL_PREFIX}/bin/* ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME}/)"
-  RESULT_VARIABLE _make_failed
-  OUTPUT_VARIABLE _copy_bin)
-message("copy binary files ${_copy_bin}")
-if (_make_failed)
-  message(FATAL_ERROR "Copy hrpsys/bin failed: ${_make_failed}")
-endif(_make_failed)
+# execute_process(
+#   COMMAND sh -c "test -e ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME} || (mkdir -p ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME}; mv ${CATKIN_DEVEL_PREFIX}/bin/* ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME}/)"
+#   RESULT_VARIABLE _make_failed
+#   OUTPUT_VARIABLE _copy_bin)
+# message("copy binary files ${_copy_bin}")
+# if (_make_failed)
+#   message(FATAL_ERROR "Copy hrpsys/bin failed: ${_make_failed}")
+# endif(_make_failed)
 
 # shared files intentionally goes to ${CATKIN_PACKAGE_SHARE_DESTINATION}
 execute_process(
@@ -41,7 +43,7 @@ endif(_make_failed)
 # plugin lib files intentionally goes to ${CATKIN_PACKAGE_SHARE_DESTINATION}
 execute_process(
   COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR}/build/hrpsys-base/rtc cmake -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME} -P cmake_install.cmake
-  COMMAND cmake -E remove_directory ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/buhbin
+  COMMAND cmake -E remove_directory ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/bin
   COMMAND sh -c "(cd ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/lib; find -iname \"*.so\" -exec rm ${CATKIN_DEVEL_PREFIX}/lib/{} \;)"
   RESULT_VARIABLE _make_failed
   OUTPUT_VARIABLE _copy_lib)
