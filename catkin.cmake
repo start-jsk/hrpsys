@@ -26,18 +26,18 @@ if (_make_failed)
 endif(_make_failed)
 
 # binary files intentionally goes to ${CATKIN_PACKAGE_BIN_DESTINATION}/lib
-# execute_process(
-#   COMMAND sh -c "test -e ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME} || (mkdir -p ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME}; mv ${CATKIN_DEVEL_PREFIX}/bin/* ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME}/)"
-#   RESULT_VARIABLE _make_failed
-#   OUTPUT_VARIABLE _copy_bin)
-# message("copy binary files ${_copy_bin}")
-# if (_make_failed)
-#   message(FATAL_ERROR "Copy hrpsys/bin failed: ${_make_failed}")
-# endif(_make_failed)
+execute_process(
+  COMMAND sh -c "test -e ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME} || (mkdir -p ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME}; mv ${CATKIN_DEVEL_PREFIX}/bin/* ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME}/)"
+  RESULT_VARIABLE _make_failed
+  OUTPUT_VARIABLE _copy_bin)
+message("copy binary files ${_copy_bin}")
+if (_make_failed)
+  message(FATAL_ERROR "Copy hrpsys/bin failed: ${_make_failed}")
+endif(_make_failed)
 
 # shared files intentionally goes to ${CATKIN_PACKAGE_SHARE_DESTINATION}
 execute_process(
-  COMMAND sh -c "test -e ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/share/${PROJECT_NAME} || (mkdir -p ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/share/${PROJECT_NAME}; mv ${CATKIN_DEVEL_PREFIX}/share/hrpsys/idl ${CATKIN_DEVEL_PREFIX}/share/hrpsys/samples ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/share/${PROJECT_NAME})"
+  COMMAND sh -c "test -e ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/share/${PROJECT_NAME} || (mkdir -p ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/share/${PROJECT_NAME}; mv -v ${CATKIN_DEVEL_PREFIX}/share/hrpsys/idl ${CATKIN_DEVEL_PREFIX}/share/hrpsys/samples ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/share/${PROJECT_NAME})"
   RESULT_VARIABLE _make_failed
   OUTPUT_VARIABLE _copy_share)
 message("copy shared files ${_copy_share}")
@@ -48,8 +48,6 @@ endif(_make_failed)
 # plugin lib files intentionally goes to ${CATKIN_PACKAGE_SHARE_DESTINATION}
 execute_process(
   COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR}/build/hrpsys-base/rtc cmake -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME} -P cmake_install.cmake
-  COMMAND cmake -E remove_directory ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/bin
-  COMMAND sh -c "(cd ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/lib; find -iname \"*.so\" -exec rm ${CATKIN_DEVEL_PREFIX}/lib/{} \;)"
   RESULT_VARIABLE _make_failed
   OUTPUT_VARIABLE _copy_lib)
 message("copy plugin library files ${_copy_lib}")
@@ -57,6 +55,26 @@ if (_make_failed)
   message(FATAL_ERROR "Copy hrpsys plugin libraries failed: ${_make_failed}")
 endif(_make_failed)
 
+# ec files intentionally goes to ${CATKIN_PACKAGE_SHARE_DESTINATION}
+execute_process(
+  COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR}/build/hrpsys-base/ec cmake -DCMAKE_INSTALL_PREFIX=${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME} -P cmake_install.cmake
+  RESULT_VARIABLE _make_failed
+  OUTPUT_VARIABLE _copy_lib)
+message("copy ec library files ${_copy_lib}")
+if (_make_failed)
+  message(FATAL_ERROR "Copy hrpsys ec libraries failed: ${_make_failed}")
+endif(_make_failed)
+
+# remove original plugin/ec lib files, (since they are intentionally goes to ${CATKIN_PACKAGE_SHARE_DESTINATION})
+execute_process(
+  COMMAND cmake -E remove_directory ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/bin
+  COMMAND sh -c "(cd ${CATKIN_DEVEL_PREFIX}/share/${PROJECT_NAME}/lib; find -iname \"*.so\" -exec rm ${CATKIN_DEVEL_PREFIX}/lib/{} \;)"
+  RESULT_VARIABLE _make_failed
+  OUTPUT_VARIABLE _copy_lib)
+message("remove original plugin library files ${_copy_lib}")
+if (_make_failed)
+  message(FATAL_ERROR "Remove original hrpsys plugin libraries failed: ${_make_failed}")
+endif(_make_failed)
 
 catkin_package(
     DEPENDS jython libxml2 sdl opencv2 libqhull libglew-dev libirrlicht-dev boost doxygen openhrp3
