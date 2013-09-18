@@ -26,6 +26,7 @@
   <build_depend>libirrlicht-dev</build_depend>
   <build_depend>libqhull</build_depend>
   <build_depend>libxml2</build_depend>
+  <build_depend>libxmu-dev</build_depend>
   <build_depend>opencv2</build_depend>
   <build_depend>sdl</build_depend>
   <build_depend>subversion</build_depend>
@@ -36,6 +37,7 @@
   <run_depend>libirrlicht-dev</run_depend>
   <run_depend>libqhull</run_depend>
   <run_depend>libxml2</run_depend>
+  <run_depend>libxmu-dev</run_depend>
   <run_depend>opencv2</run_depend>
   <run_depend>sdl</run_depend>
 
