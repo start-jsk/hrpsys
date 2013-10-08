@@ -3,7 +3,7 @@
   <version>0.0.1</version>
   <description>
    <p>Basic RT components and utilities to control robots using OpenRTM.</p>
-
+   <p>Its development is happening at <a href = "https://code.google.com/p/hrpsys-base/source/browse/#svn%2Ftrunk">code.google.com/p/hrpsys-base</a>. The repository listed below is that of its ROS wrapper.</p>
    <p>Real version number, 3.1.4, is kept back until this discussion (http://code.google.com/p/rtm-ros-robotics/issues/detail?id=159) resolves. </p>
   </description>
 
@@ -11,6 +11,7 @@
   <maintainer email="k-okada@jsk.t.u-tokyo.ac.jp">Kei Okada</maintainer>
   <maintainer email="iisaito@kinugarage.com">Isao Isaac Saito</maintainer>
   <author>AIST</author>
+  <author>Fumio Kanehiro</author>
 
   <url type="website">http://ros.org/wiki/hrpsys</url>
   <url type="repository">https://code.google.com/p/hrpsys-base</url>
