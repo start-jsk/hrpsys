@@ -4,8 +4,8 @@ from distutils.core import setup
 from catkin_pkg.python_setup import generate_distutils_setup
 
 d = generate_distutils_setup(
-    packages=['hrpsys']
-#    package_dir={'': 'lib/python2.7/dist-packages/hrpsys' }
+    packages=[''],
+    package_dir={'': 'lib/python2.7/dist-packages' }
 )
 
 setup(**d)

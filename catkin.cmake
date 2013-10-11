@@ -76,8 +76,6 @@ if (_make_failed)
   message(FATAL_ERROR "Remove original hrpsys plugin libraries failed: ${_make_failed}")
 endif(_make_failed)
 
-catkin_python_setup()
-
 catkin_package(
     DEPENDS jython libxml2 sdl opencv2 libqhull libglew-dev libirrlicht-dev boost doxygen openhrp3
     CATKIN-DEPENDS
