@@ -12,7 +12,7 @@ set(OPENRTM_DIR ${openrtm_aist_PREFIX}/lib/openrtm_aist)
 set(ENV{PKG_CONFIG_PATH} $ENV{PKG_CONFIG_PATH}:${CATKIN_DEVEL_PREFIX}/lib/pkgconfig)
 execute_process(
   COMMAND sh -c "test -e ${CATKIN_DEVEL_PREFIX}/share/hrpsys/ || rm -f ${PROJECT_SOURCE_DIR}/installed ${PROJECT_SOURCE_DIR}/build/hrpsys-base/CMakeCache.txt"
-  COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base OPENRTM_DIR=${OPENRTM_DIR} PKG_CONFIG_PATH_SETUP= INSTALL_DIR=${CATKIN_DEVEL_PREFIX}build/hrpsys-base-source
+  COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hrpsys-base OPENRTM_DIR=${OPENRTM_DIR} PKG_CONFIG_PATH_SETUP= INSTALL_DIR=${CATKIN_DEVEL_PREFIX} build/hrpsys-base-source
                 RESULT_VARIABLE _checkout_failed)
 if (_checkout_failed)
   message(FATAL_ERROR "Download hrpsys failed")
