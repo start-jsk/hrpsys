@@ -1,6 +1,6 @@
 <package>
   <name>hrpsys</name>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <description>
    <p>Basic RT components and utilities to control robots using OpenRTM.</p>
    <p>Its development is happening at <a href = "https://code.google.com/p/hrpsys-base/source/browse/#svn%2Ftrunk">code.google.com/p/hrpsys-base</a>. The repository listed below is that of its ROS wrapper.</p>
