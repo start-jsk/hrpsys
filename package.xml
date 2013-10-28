@@ -1,10 +1,10 @@
 <package>
   <name>hrpsys</name>
-  <version>0.0.2</version>
+  <version>3.1.2</version>
   <description>
    <p>Basic RT components and utilities to control robots using OpenRTM.</p>
-   <p>Its development is happening at <a href = "https://code.google.com/p/hrpsys-base/source/browse/#svn%2Ftrunk">code.google.com/p/hrpsys-base</a>. The repository listed below is that of its ROS wrapper.</p>
-   <p>Real version number, 3.1.4, is kept back until this discussion (http://code.google.com/p/rtm-ros-robotics/issues/detail?id=159) resolves. </p>
+   <p>This package is a wrapper of its upstream repository. Its development is happening at <a href = "https://code.google.com/p/hrpsys-base/source/browse/#svn%2Ftrunk">code.google.com/p/hrpsys-base</a>.</p>
+   <p>The upstream version number to date is 3.1.4. Please refer to this discussion (http://code.google.com/p/rtm-ros-robotics/issues/detail?id=159) for the reason of this version conversion.</p>
   </description>
 
   <license>EPL</license>
