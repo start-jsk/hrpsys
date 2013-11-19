@@ -2,7 +2,8 @@ all: installed
 
 INSTALL_DIR ?= ${CURDIR}
 SVN_DIR = build/hrpsys-base-source
-SVN_URL = http://hrpsys-base.googlecode.com/svn/trunk
+#SVN_URL = https://hrpsys-base.googlecode.com/svn/trunk
+SVN_URL = http://hrpsys-base.googlecode.com/svn/tags/315.0.0
 #SVN_REVISION=-r@REVISION@
 
 include ${CURDIR}/svn_checkout.mk
