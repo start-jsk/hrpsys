@@ -1,10 +1,11 @@
 <package>
   <name>hrpsys</name>
-  <version>3.1.4</version>
+  <version>315.0.0</version>
   <description>
-   <p>Basic RT components and utilities to control robots using OpenRTM.</p>
-   <p>This package is a wrapper of its upstream repository. Its development is happening at <a href = "https://code.google.com/p/hrpsys-base/source/browse/#svn%2Ftrunk">code.google.com/p/hrpsys-base</a>.</p>
-   <p>The upstream version number to date is 3.1.4. Please refer to this discussion (http://code.google.com/p/rtm-ros-robotics/issues/detail?id=159) for the reason of this version conversion.</p>
+   <p>An <a href = "http://www.openrtm.org/pub/OpenRTM-aist/">OpenRTM-aist</a>-based robot controller. This package is the most tailored for humanoid (dual-arm and/or biped) robots for historical reason.</p>
+   <p>hrpsys package does not only wraps but build and installs the code from its mainstream repository (<a href = "https://code.google.com/p/hrpsys-base/source/browse/#svn%2Ftrunk">code.google.com/p/hrpsys-base</a>).</p>
+   <p>The package version number is synchronized to that of mainstream, based on <a href = "http://code.google.com/p/rtm-ros-robotics/issues/detail?id=165#c5">this decision</a>.
+   </p>
   </description>
 
   <license>EPL</license>
@@ -14,12 +15,10 @@
   <author>Fumio Kanehiro</author>
 
   <url type="website">http://ros.org/wiki/hrpsys</url>
-  <url type="repository">https://code.google.com/p/hrpsys-base</url>
-  <url type="bugtracker">https://code.google.com/p/hrpsys-base/issues</url>
+  <url type="repository">https://code.google.com/p/rtm-ros-robotics</url>
+  <url type="bugtracker">https://code.google.com/p/rtm-ros-robotics/issues/list</url>
 
   <buildtool_depend>catkin</buildtool_depend>
-
-  <build_depend>openhrp3</build_depend>
 
   <build_depend>doxygen</build_depend>
   <build_depend>glut</build_depend>
@@ -29,10 +28,9 @@
   <build_depend>libxml2</build_depend>
   <build_depend>libxmu-dev</build_depend>
   <build_depend>opencv2</build_depend>
+  <build_depend>openhrp3</build_depend>
   <build_depend>sdl</build_depend>
   <build_depend>subversion</build_depend>
-
-  <run_depend>openhrp3</run_depend>
 
   <run_depend>glut</run_depend>
   <run_depend>libirrlicht-dev</run_depend>
@@ -40,6 +38,7 @@
   <run_depend>libxml2</run_depend>
   <run_depend>libxmu-dev</run_depend>
   <run_depend>opencv2</run_depend>
+  <run_depend>openhrp3</run_depend>
   <run_depend>sdl</run_depend>
 
   <!-- <test_depend>openhrp3</test_depend> -->
