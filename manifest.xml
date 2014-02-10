@@ -15,6 +15,8 @@
 
   <depend package="openhrp3"/>
 
+  <rosdep name="openhrp3" />
+
   <rosdep name="jython" />
   <rosdep name="libxml2" />
   <rosdep name="sdl" />
