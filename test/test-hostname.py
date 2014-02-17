@@ -39,8 +39,12 @@ class TestHrpsysHostname(unittest.TestCase):
         self.check_initCORBA(None)
 
     @unittest.expectedFailure
-    def test_unknown(self):
+    def test_X_unknown(self):
         self.check_initCORBA('unknown')
+
+    @unittest.expectedFailure
+    def test_X_123_45_67_89(self):
+        self.check_initCORBA('123.45.67.89')
 
 #unittest.main()
 if __name__ == '__main__':
