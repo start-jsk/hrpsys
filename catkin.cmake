@@ -76,6 +76,19 @@ if (_make_failed)
   message(FATAL_ERROR "Remove original hrpsys plugin libraries failed: ${_make_failed}")
 endif(_make_failed)
 
+# fix PA10 sample file
+execute_process(
+  COMMAND sed -i s@${CATKIN_DEVEL_PREFIX}/lib@${CATKIN_DEVEL_PREFIX}/share/hrpsys/lib@ ${CATKIN_DEVEL_PREFIX}/share/hrpsys/share/hrpsys/samples/PA10/hrpsys.sh
+  COMMAND sed -i s@${CATKIN_DEVEL_PREFIX}/lib@${CATKIN_DEVEL_PREFIX}/share/hrpsys/lib@ ${CATKIN_DEVEL_PREFIX}/share/hrpsys/share/hrpsys/samples/PA10/rtc.conf
+  COMMAND sed -i s@localhost:15005@localhost:2809@ ${CATKIN_DEVEL_PREFIX}/share/hrpsys/share/hrpsys/samples/PA10/rtc.conf
+  COMMAND sed -i s@OpenHRP-3.1@openhrp3/share/OpenHRP-3.1@ ${CATKIN_DEVEL_PREFIX}/share/hrpsys/share/hrpsys/samples/PA10/RobotHardware.conf
+  COMMAND sed -i s@$(PROJECT_DIR)/..@/opt/ros/groovy/share/openhrp3/share/OpenHRP-3.1/sample@ ${CATKIN_DEVEL_PREFIX}/share/hrpsys/share/hrpsys/samples/PA10/PA10monitor.xml
+                RESULT_VARIABLE _sed_failed)
+if (_sed_failed)
+  message(FATAL_ERROR "Fix hrpsys sample file failed")
+endif(_sed_failed)
+
+#
 catkin_package(
     DEPENDS jython libxml2 sdl opencv2 libqhull libglew-dev libirrlicht-dev boost doxygen openhrp3
     CATKIN-DEPENDS

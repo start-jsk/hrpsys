@@ -1,0 +1,18 @@
+<launch>
+  <!-- BEGIN:common setting -->
+  <env name="LANG" value="C" />
+  <env name="ORBgiopMaxMsgSize" value="2147483648" />
+  <!-- env name="PROJECT_DIR" value="$(find hrpsys)" / -->
+  <env name="ROS_HOME" value="$(find hrpsys)/share/hrpsys/samples/PA10/" />
+  <!-- END:common setting -->
+
+  <node name="modelloader" pkg="openhrp3" type="openhrp-model-loader" output="screen"/>
+  <node name="hrpsys" pkg="hrpsys" type="hrpsys.sh" output="screen"  cwd="node" />
+
+  <!-- cd $(find hrpsys)/share/hrpsys/samples/PA10/ -->
+  <!-- node name="viewer" pkg="hrpsys" type="hrpsys-monitor"
+        args="$(find hrpsys)/share/hrpsys/samples/PA10/PA10monitor.xml" / -->
+
+
+  <test test-name="config_hostname" pkg="hrpsys" type="test-hostname.py" />
+</launch>
