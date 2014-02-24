@@ -27,6 +27,7 @@
   <rosdep name="boost" />
 
   <rosdep name="doxygen" />
+  <rosdep name="mk" />
 </package>
 
 
