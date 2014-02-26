@@ -121,6 +121,10 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
     message("sed -i s@${CATKIN_DEVEL_PREFIX}/lib@${PROJECT_SOURCE_DIR}/lib@s ${_conf_file} ")
     execute_process(COMMAND sed -i s@${CATKIN_DEVEL_PREFIX}/lib@${PROJECT_SOURCE_DIR}/lib@g ${_conf_file})
   endforeach()
+
+  message("fix ${CATKIN_DEVEL_PREFIX}/lib/pkgconfig/hrpsys-base.pc")
+  execute_process(COMMAND sed -i s@\${prefix}/share@${PROJECT_SOURCE_DIR}/share@g ${CATKIN_DEVEL_PREFIX}/lib/pkgconfig/hrpsys-base.pc) # basic
+
 endif(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
 
 
@@ -154,6 +158,7 @@ install(CODE
   "execute_process(COMMAND echo \"fix \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_LIB_DESTINATION}/pkgconfig/hrpsys-base.pc ${CATKIN_DEVEL_PREFIX} -> ${CMAKE_INSTALL_PREFIX}\")
    execute_process(COMMAND sed -i s@${CATKIN_DEVEL_PREFIX}@${CMAKE_INSTALL_PREFIX}@g \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_LIB_DESTINATION}/pkgconfig/hrpsys-base.pc) # basic
    execute_process(COMMAND sed -i s@{prefix}/bin@${prefix}/lib/hrpsys@g \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_LIB_DESTINATION}/pkgconfig/hrpsys-base.pc) # basic
+   execute_process(COMMAND sed -i s@${PROJECT_SOURCE_DIR}/share@\\\${prefix}/share/hrpsys/share@g \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_LIB_DESTINATION}/pkgconfig/hrpsys-base.pc) # basic
 ")
 
 add_rostest(test/test-hrpsys.test)
