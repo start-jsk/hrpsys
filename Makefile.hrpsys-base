@@ -3,19 +3,28 @@ all: installed
 INSTALL_DIR ?= ${CURDIR}
 SVN_DIR = build/hrpsys-base-source
 #SVN_URL = https://hrpsys-base.googlecode.com/svn/trunk
-SVN_URL = http://hrpsys-base.googlecode.com/svn/tags/315.1.7
+SVN_URL = http://hrpsys-base.googlecode.com/svn/tags/315.1.8
 #SVN_REVISION=-r@REVISION@
 
-include ${CURDIR}/svn_checkout.mk
+OPENRTM_DIR ?= $(shell rospack find openrtm_aist)
+PKG_CONFIG_PATH_SETUP ?= PKG_CONFIG_PATH=$(shell rospack find openrtm_aist)/lib/pkgconfig:$(shell rospack find openhrp3)/lib/pkgconfig:$(PKG_CONFIG_PATH)
+MK_DIR       = $(shell rospack find mk)
 
-OPENRTM_DIR ?=`rospack find openrtm_aist`
-PKG_CONFIG_PATH_SETUP ?= PKG_CONFIG_PATH=`rospack find openrtm_aist`/lib/pkgconfig:`rospack find openhrp3`/lib/pkgconfig:$(PKG_CONFIG_PATH)
+include $(MK_DIR)/svn_checkout.mk
 
-installed: ${SVN_DIR} patched
-	(mkdir -p build/hrpsys-base && cd build/hrpsys-base && ${PKG_CONFIG_PATH_SETUP} cmake -DCMAKE_INSTALL_PREFIX=$(INSTALL_DIR) -DOPENRTM_DIR=${OPENRTM_DIR} -DENABLE_INSTALL_RPATH=ON -DCOMPILE_JAVA_STUFF=OFF -DEXTRA_RTC_DIRS=$(EXTRA_RTC_DIRS) -DEXTRA_IDL_FILES=$(EXTRA_IDL_FILES) -DENABLE_INSTALL_RPATH_TO_SELF=ON ${CURDIR}/build/hrpsys-base-source && make && make install) 2>&1 | tee ${CURDIR}/compile.log | awk 'NR%10==0'|| tail -100 ${CURDIR}/compile.log
+
+patched_no_makefile: $(SVN_PATCH) ## copy from svn_checkout.mk
+ifneq ($(strip $(SVN_PATCH)),)
+	svn revert -R $(SVN_DIR)
+endif
+	-cd $(SVN_DIR) && $(SVN_CMDLINE) up $(SVN_REVISION)
+	$(foreach PATCH, $(SVN_PATCH), patch -d $(SVN_DIR) -p0 < $(PATCH) && ) echo patched
+	touch rospack_nosubdirs
+	touch patched
+
+installed: ${SVN_DIR} # patched_no_makefile
+	(mkdir -p build/hrpsys-base && cd build/hrpsys-base && ${PKG_CONFIG_PATH_SETUP} cmake -DCMAKE_INSTALL_PREFIX=$(INSTALL_DIR) -DOPENRTM_DIR=${OPENRTM_DIR} -DENABLE_INSTALL_RPATH=ON -DCOMPILE_JAVA_STUFF=OFF -DEXTRA_RTC_DIRS=$(EXTRA_RTC_DIRS) -DEXTRA_IDL_FILES=$(EXTRA_IDL_FILES) -DENABLE_INSTALL_RPATH_TO_SELF=ON ${CURDIR}/build/hrpsys-base-source && make && make install) 2>&1 | tee ${CURDIR}/compile.log
 	#
-	# copy idl
-	# mkdir -p $(CURDIR)/idl && cp -u $(CURDIR)/share/hrpsys/idl/* ./idl/
 	touch installed
 
 clean:
