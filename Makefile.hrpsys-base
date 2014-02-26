@@ -3,7 +3,7 @@ all: installed
 INSTALL_DIR ?= ${CURDIR}
 SVN_DIR = build/hrpsys-base-source
 #SVN_URL = https://hrpsys-base.googlecode.com/svn/trunk
-SVN_URL = http://hrpsys-base.googlecode.com/svn/tags/315.1.7
+SVN_URL = http://hrpsys-base.googlecode.com/svn/tags/315.1.8
 #SVN_REVISION=-r@REVISION@
 
 OPENRTM_DIR ?= $(shell rospack find openrtm_aist)
