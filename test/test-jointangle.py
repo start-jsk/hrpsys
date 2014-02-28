@@ -29,7 +29,8 @@ class PA10(HrpsysConfigurator):
 class TestJointAngle(unittest.TestCase):
     h = None
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(self):
         global h
         h = PA10()
         h.init()
