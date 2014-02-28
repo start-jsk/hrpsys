@@ -155,12 +155,14 @@ install(DIRECTORY test share
 
 install(CODE
   "execute_process(COMMAND echo \"fix ${_conf_file} ${PROJECT_SOURCE_DIR} -> ${CMAKE_INSTALL_PREFIX}\")
-   file(GLOB _conf_files \"\$ENV{DISTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/share/hrpsys/samples/*/*.conf\")
+   execute_process(COMMAND echo \"                  ${openhrp3_SOURCE_DIR} -> ${CMAKE_INSTALL_PREFIX}/share/openhrp3\")
+   execute_process(COMMAND echo \"                  ${CATKIN_DEVEL_PREFIX} -> ${CMAKE_INSTALL_PREFIX}\")
+   file(GLOB _conf_files \"\$ENV{DISTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/share/hrpsys/samples/*/*.*\")
    foreach(_conf_file \${_conf_files})
      execute_process(COMMAND echo \"fix \${_conf_file}\")
-     #execute_process(COMMAND sed -i s@${PROJECT_SOURCE_DIR}/share/OpenHRP-3.1@${CMAKE_INSTALL_PREFIX}/share/openhrp3/share/OpenHRP-3.1@g \${_conf_file})
+     execute_process(COMMAND sed -i s@${openhrp3_SOURCE_DIR}/share/OpenHRP-3.1@${CMAKE_INSTALL_PREFIX}/share/openhrp3/share/OpenHRP-3.1@g \${_conf_file})
      execute_process(COMMAND sed -i s@${PROJECT_SOURCE_DIR}/lib@${CMAKE_INSTALL_PREFIX}/share/hrpsys/lib@g \${_conf_file})
-     #execute_process(COMMAND sed -i s@${PROJECT_SOURCE_DIR}@${CMAKE_INSTALL_PREFIX}@g \${_conf_file})
+     execute_process(COMMAND sed -i s@${CATKIN_DEVEL_PREFIX}@${CMAKE_INSTALL_PREFIX}@g \${_conf_file})
    endforeach()
   ")
 
