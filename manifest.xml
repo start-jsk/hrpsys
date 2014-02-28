@@ -19,10 +19,12 @@
 
   <rosdep name="jython" />
   <rosdep name="libxml2" />
+  <rosdep name="libxmu-dev" />
   <rosdep name="sdl" />
   <rosdep name="opencv2" />
   <rosdep name="libqhull" />
   <rosdep name="libglew-dev" />
+  <rosdep name="glut" />
   <rosdep name="libirrlicht-dev" />
   <rosdep name="boost" />
 
