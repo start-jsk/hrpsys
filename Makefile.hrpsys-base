@@ -7,7 +7,7 @@ SVN_URL = http://hrpsys-base.googlecode.com/svn/tags/315.1.8
 #SVN_REVISION=-r@REVISION@
 
 OPENRTM_DIR ?= $(shell rospack find openrtm_aist)
-PKG_CONFIG_PATH_SETUP ?= PKG_CONFIG_PATH=$(shell rospack find openrtm_aist)/lib/pkgconfig:$(shell rospack find openhrp3)/lib/pkgconfig:$(PKG_CONFIG_PATH)
+PKG_CONFIG_PATH ?= $(shell rospack find openrtm_aist)/lib/pkgconfig:$(shell rospack find openhrp3)/lib/pkgconfig:$(PKG_CONFIG_PATH)
 MK_DIR       = $(shell rospack find mk)
 
 include $(MK_DIR)/svn_checkout.mk
@@ -23,7 +23,7 @@ endif
 	touch patched
 
 installed: ${SVN_DIR} # patched_no_makefile
-	(mkdir -p build/hrpsys-base && cd build/hrpsys-base && ${PKG_CONFIG_PATH_SETUP} cmake -DCMAKE_INSTALL_PREFIX=$(INSTALL_DIR) -DOPENRTM_DIR=${OPENRTM_DIR} -DENABLE_INSTALL_RPATH=ON -DCOMPILE_JAVA_STUFF=OFF -DEXTRA_RTC_DIRS=$(EXTRA_RTC_DIRS) -DEXTRA_IDL_FILES=$(EXTRA_IDL_FILES) -DENABLE_INSTALL_RPATH_TO_SELF=ON ${CURDIR}/build/hrpsys-base-source && make && make install) 2>&1 | tee ${CURDIR}/compile.log
+	(mkdir -p build/hrpsys-base && cd build/hrpsys-base && PKG_CONFIG_PATH=${PKG_CONFIG_PATH} cmake -DCMAKE_INSTALL_PREFIX=$(INSTALL_DIR) -DOPENRTM_DIR=${OPENRTM_DIR} -DENABLE_INSTALL_RPATH=ON -DCOMPILE_JAVA_STUFF=OFF -DEXTRA_RTC_DIRS=$(EXTRA_RTC_DIRS) -DEXTRA_IDL_FILES=$(EXTRA_IDL_FILES) -DENABLE_INSTALL_RPATH_TO_SELF=ON ${CURDIR}/build/hrpsys-base-source && make && make install) 2>&1 | tee ${CURDIR}/compile.log
 	#
 	touch installed
 
