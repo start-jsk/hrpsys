@@ -20,7 +20,7 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
     INSTALL_DIR=${CATKIN_DEVEL_PREFIX}
     OPENRTM_DIR='' # keep blank so that FindOpenRTM.cmake uses rtm-config
     MK_DIR=${mk_PREFIX}/share/mk
-    PKG_CONFIG_PATH_SETUP="PKG_CONFIG_PATH=${openhrp3_PREFIX}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH}" # for openrtm3.1.pc
+    PKG_CONFIG_PATH=${openhrp3_PREFIX}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH} # for openrtm3.1.pc
     installed
     RESULT_VARIABLE _make_failed)
   if (_make_failed)
@@ -75,10 +75,13 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
   foreach(_lib_file ${_lib_files})
     get_filename_component(_lib_file_name ${_lib_file} NAME)
     if(EXISTS ${CATKIN_DEVEL_PREFIX}/lib/${_lib_file_name})
-      execute_process(
-        COMMAND cmake -E rename ${CATKIN_DEVEL_PREFIX}/lib/${_lib_file_name} ${PROJECT_SOURCE_DIR}/lib/${_lib_file_name}
-        RESULT_VARIABLE _rename_failed)
-      message("move library files ${PROJECT_SOURCE_DIR}/lib/${_lib_file_name}")
+      if ("${_lib_file_name}" MATCHES "libhrpsys.*so")  # libhrpsys*.so remains in global directory
+      else()                                            # RTC components goto `rospack find hrpsys`/lib directory
+        execute_process(
+          COMMAND cmake -E rename ${CATKIN_DEVEL_PREFIX}/lib/${_lib_file_name} ${PROJECT_SOURCE_DIR}/lib/${_lib_file_name}
+          RESULT_VARIABLE _rename_failed)
+        message("move library files ${PROJECT_SOURCE_DIR}/lib/${_lib_file_name}")
+      endif()
       if (_rename_failed)
         message(FATAL_ERROR "Move hrpsys/lib failed: ${_rename_failed}")
       endif(_rename_failed)
