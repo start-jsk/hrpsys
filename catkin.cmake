@@ -165,3 +165,4 @@ install(CODE
 ")
 
 add_rostest(test/test-hrpsys.test)
+add_rostest(test/test-colcheck.test)
