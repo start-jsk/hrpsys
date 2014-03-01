@@ -9,6 +9,7 @@ SVN_URL = http://hrpsys-base.googlecode.com/svn/tags/315.1.8
 OPENRTM_DIR ?= $(shell rospack find openrtm_aist)
 PKG_CONFIG_PATH ?= $(shell rospack find openrtm_aist)/lib/pkgconfig:$(shell rospack find openhrp3)/lib/pkgconfig:$(PKG_CONFIG_PATH)
 MK_DIR       = $(shell rospack find mk)
+NUM_OF_CPUS = $(shell grep -c '^processor' /proc/cpuinfo)
 
 include $(MK_DIR)/svn_checkout.mk
 
@@ -23,7 +24,7 @@ endif
 	touch patched
 
 installed: ${SVN_DIR} # patched_no_makefile
-	(mkdir -p build/hrpsys-base && cd build/hrpsys-base && PKG_CONFIG_PATH=${PKG_CONFIG_PATH} cmake -DCMAKE_INSTALL_PREFIX=$(INSTALL_DIR) -DOPENRTM_DIR=${OPENRTM_DIR} -DENABLE_INSTALL_RPATH=ON -DCOMPILE_JAVA_STUFF=OFF -DEXTRA_RTC_DIRS=$(EXTRA_RTC_DIRS) -DEXTRA_IDL_FILES=$(EXTRA_IDL_FILES) -DENABLE_INSTALL_RPATH_TO_SELF=ON -DENABLE_DOXYGEN=OFF  ${CURDIR}/build/hrpsys-base-source && make -j`grep -c '^processor' /proc/cpuinfo` && make install) 2>&1 | tee ${CURDIR}/compile.log
+	(mkdir -p build/hrpsys-base && cd build/hrpsys-base && PKG_CONFIG_PATH=${PKG_CONFIG_PATH} cmake -DCMAKE_INSTALL_PREFIX=$(INSTALL_DIR) -DOPENRTM_DIR=${OPENRTM_DIR} -DENABLE_INSTALL_RPATH=ON -DCOMPILE_JAVA_STUFF=OFF -DEXTRA_RTC_DIRS=$(EXTRA_RTC_DIRS) -DEXTRA_IDL_FILES=$(EXTRA_IDL_FILES) -DENABLE_INSTALL_RPATH_TO_SELF=ON -DENABLE_DOXYGEN=OFF  ${CURDIR}/build/hrpsys-base-source && make -j$(shell if [ $(NUM_OF_CPUS) -gt 4 ] ; then echo "4"; else echo $(NUM_OF_CPUS); fi) && make install) 2>&1 | tee ${CURDIR}/compile.log
 	#
 	touch installed
 
