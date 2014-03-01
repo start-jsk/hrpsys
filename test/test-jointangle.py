@@ -27,21 +27,21 @@ class PA10(HrpsysConfigurator):
 
 
 class TestJointAngle(unittest.TestCase):
-    h = None
 
     @classmethod
     def setUpClass(self):
-        global h
         h = PA10()
         h.init()
 
     def test_get_joint_angles(self):
-        global h
+        h = PA10()
+        h.findComps()
         print >>sys.stderr,  h.getJointAngles()
         self.assertEqual(len(h.getJointAngles()), int(9))
 
     def test_set_joint_angles(self):
-        global h
+        h = PA10()
+        h.findComps()
         self.assertTrue(h.setJointAngles(h.getJointAngles(),1))
         self.assertEqual(h.waitInterpolation(), None)
 
