@@ -110,14 +110,15 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
   if (_make_failed)
     message(FATAL_ERROR "Move share/hrpsys failed: ${_make_failed}")
   endif(_make_failed)
-  execute_process(
-    COMMAND cmake -E rename ${CATKIN_DEVEL_PREFIX}/share/doc ${PROJECT_SOURCE_DIR}/share/doc
-    RESULT_VARIABLE _make_failed)
-    message("move share directory ${CATKIN_DEVEL_PREFIX}/share/doc ${PROJECT_SOURCE_DIR}/share/doc
-")
-  if (_make_failed)
-    message(FATAL_ERROR "Move share/hrpsys failed: ${_make_failed}")
-  endif(_make_failed)
+  if(EXISTS ${CATKIN_DEVEL_PREFIX}/share/doc)
+    execute_process(
+      COMMAND cmake -E rename ${CATKIN_DEVEL_PREFIX}/share/doc ${PROJECT_SOURCE_DIR}/share/doc
+      RESULT_VARIABLE _make_failed)
+    message("move doc directory ${CATKIN_DEVEL_PREFIX}/share/doc ${PROJECT_SOURCE_DIR}/share/doc")
+    if (_make_failed)
+      message(FATAL_ERROR "Move share/doc failed: ${_make_failed}")
+    endif(_make_failed)
+  endif()
 
   message("openhrp3_SOURCE_DIR=${openhrp3_SOURCE_DIR}")
   message("    openhrp3_PREFIX=${openhrp3_PREFIX}")
