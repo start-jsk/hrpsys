@@ -18,4 +18,5 @@
 
 
   <test test-name="config_hostname" pkg="hrpsys" type="test-hostname.py" />
+  <test test-name="pkgconfig" pkg="hrpsys" type="test-pkgconfig.py" />
 </launch>
