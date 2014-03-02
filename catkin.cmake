@@ -75,7 +75,7 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
   foreach(_lib_file ${_lib_files})
     get_filename_component(_lib_file_name ${_lib_file} NAME)
     if(EXISTS ${CATKIN_DEVEL_PREFIX}/lib/${_lib_file_name})
-      if ("${_lib_file_name}" MATCHES "libhrpsys.*so")  # libhrpsys*.so remains in global directory
+      if ("${_lib_file_name}" MATCHES "libhrp.*so")     # libhrpsys*.so and libhrpIo.so remains in global directory
       else()                                            # RTC components goto `rospack find hrpsys`/lib directory
         execute_process(
           COMMAND cmake -E rename ${CATKIN_DEVEL_PREFIX}/lib/${_lib_file_name} ${PROJECT_SOURCE_DIR}/lib/${_lib_file_name}
