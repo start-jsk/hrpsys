@@ -27,6 +27,7 @@
   <rosdep name="glut" />
   <rosdep name="libirrlicht-dev" />
   <rosdep name="boost" />
+  <rosdep name="python-tk" />
 
   <rosdep name="doxygen" />
   <rosdep name="mk" />
