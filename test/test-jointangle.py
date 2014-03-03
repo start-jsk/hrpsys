@@ -31,7 +31,7 @@ class TestJointAngle(unittest.TestCase):
     @classmethod
     def setUpClass(self):
         h = PA10()
-        h.init()
+        h.init(robotname="PA10Controller(Robot)0")
 
     def test_get_joint_angles(self):
         h = PA10()
