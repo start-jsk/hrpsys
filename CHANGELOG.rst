@@ -2,8 +2,8 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+315.1.8 (2014-03-06)
+--------------------
 * Do not pollute src directory, https://github.com/start-jsk/hrpsys/issues/3
 * Utilize .travis.yml
 * Initial commit of CHANGELOG.rst
