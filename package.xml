@@ -31,6 +31,7 @@
   <build_depend>opencv2</build_depend>
   <build_depend>openhrp3</build_depend>
   <build_depend>python-tk</build_depend>
+  <build_depend>rostest</build_depend>
   <build_depend>sdl</build_depend>
   <build_depend>subversion</build_depend>
 
