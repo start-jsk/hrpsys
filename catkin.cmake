@@ -28,6 +28,7 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
   endif(_make_failed)
 
   # move programs
+  # bin -> lib/hrpsys/
   if(NOT EXISTS ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME})
     execute_process(
       COMMAND cmake -E make_directory ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME}
@@ -56,6 +57,7 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
   endforeach()
 
   # move libraries
+  # lib -> {source}/lib
   if(NOT EXISTS ${PROJECT_SOURCE_DIR}/lib/)
     execute_process(
       COMMAND cmake -E make_directory ${PROJECT_SOURCE_DIR}/lib/
@@ -155,6 +157,9 @@ catkin_package(
 install(
   DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/hrpsys
   DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION})
+install(
+  FILES ${CATKIN_DEVEL_PREFIX}/lib/pkgconfig/hrpsys-base.pc
+  DESTINATION ${CATKIN_GLOBAL_LIB_DESTINATION}/pkgconfig)
 install(DIRECTORY lib/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/lib
   USE_SOURCE_PERMISSIONS)
