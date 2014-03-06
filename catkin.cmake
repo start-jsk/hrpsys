@@ -28,6 +28,7 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
   endif(_make_failed)
 
   # move programs
+  # bin -> lib/hrpsys/
   if(NOT EXISTS ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME})
     execute_process(
       COMMAND cmake -E make_directory ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME}
@@ -56,6 +57,7 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
   endforeach()
 
   # move libraries
+  # lib -> {source}/lib
   if(NOT EXISTS ${PROJECT_SOURCE_DIR}/lib/)
     execute_process(
       COMMAND cmake -E make_directory ${PROJECT_SOURCE_DIR}/lib/
@@ -155,12 +157,50 @@ catkin_package(
 install(
   DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/hrpsys
   DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION})
+install(
+  FILES ${CATKIN_DEVEL_PREFIX}/lib/pkgconfig/hrpsys-base.pc
+  DESTINATION ${CATKIN_GLOBAL_LIB_DESTINATION}/pkgconfig)
 install(DIRECTORY lib/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/lib
   USE_SOURCE_PERMISSIONS)
 install(DIRECTORY test share
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
   USE_SOURCE_PERMISSIONS)
+
+## copy CATKIN_DEVEL_PREFIX/lib directory
+execute_process(
+  COMMAND grep ${CATKIN_DEVEL_PREFIX}/bin ${CMAKE_CURRENT_BINARY_DIR}/build/hrpsys-base/install_manifest.txt
+  OUTPUT_VARIABLE _bin_files
+  RESULT_VARIABLE _grep_failed)
+if (_grep_failed)
+  message(FATAL_ERROR "grep : ${CMAKE_CURRENT_BINARY_DIR}/build/hrpsys-base/install_manifest.txt ${_make_failed}")
+endif(_grep_failed)
+string(REGEX REPLACE "\n" ";" _bin_files ${_bin_files})
+foreach(_bin_file ${_bin_files})
+  get_filename_component(_bin_file_name ${_bin_file} NAME)
+  install(PROGRAMS ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME}/${_bin_file_name} DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${PROJECT_NAME})
+endforeach()
+execute_process(
+  COMMAND grep ${CATKIN_DEVEL_PREFIX}/lib/ ${CMAKE_CURRENT_BINARY_DIR}/build/hrpsys-base/install_manifest.txt
+  OUTPUT_VARIABLE _lib_files
+  RESULT_VARIABLE _grep_failed)
+if (_grep_failed)
+  message(FATAL_ERROR "grep : ${CMAKE_CURRENT_BINARY_DIR}/build/hrpsys-base/install_manifest.txt ${_grep_failed}")
+endif(_grep_failed)
+string(REGEX REPLACE "\n" ";" _lib_files ${_lib_files})
+foreach(_lib_file ${_lib_files})
+  get_filename_component(_lib_file_name ${_lib_file} NAME)
+  if ("${_lib_file}" MATCHES "lib/python*")
+    # install all python code
+    string(REGEX REPLACE "${CATKIN_DEVEL_PREFIX}/lib" "" _py_file ${_lib_file})
+    get_filename_component(_py_file_dir ${_py_file} PATH)
+    #install(PROGRAMS ${CATKIN_DEVEL_PREFIX}/lib/${_py_file} DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${_py_file_dir})
+    install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/lib/${_py_file_dir}/ DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${_py_file_dir})
+  elseif ("${_lib_file_name}" MATCHES "libhrp.*so")     # libhrpsys*.so and libhrpIo.so remains in global directory
+    install(PROGRAMS ${CATKIN_DEVEL_PREFIX}/lib/${_lib_file_name} DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+  endif()
+endforeach()
+## done copy libs
 
 install(CODE
   "execute_process(COMMAND echo \"fix ${_conf_file} ${PROJECT_SOURCE_DIR} -> ${CMAKE_INSTALL_PREFIX}\")
@@ -176,7 +216,11 @@ install(CODE
   ")
 
 install(CODE
-  "execute_process(COMMAND echo \"fix \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_LIB_DESTINATION}/pkgconfig/hrpsys-base.pc ${CATKIN_DEVEL_PREFIX} -> ${CMAKE_INSTALL_PREFIX}\")
+  "# check if hrpsys-base.pc exists
+   if (NOT EXISTS \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_LIB_DESTINATION}/pkgconfig/hrpsys-base.pc )
+    message(FATAL_ERROR \"FATAL_ERROR \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_LIB_DESTINATION}/pkgconfig/hrpsys-base.pc is not exists\")
+   endif()
+   execute_process(COMMAND echo \"fix \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_LIB_DESTINATION}/pkgconfig/hrpsys-base.pc ${CATKIN_DEVEL_PREFIX} -> ${CMAKE_INSTALL_PREFIX}\")
    execute_process(COMMAND sed -i s@${CATKIN_DEVEL_PREFIX}@${CMAKE_INSTALL_PREFIX}@g \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_LIB_DESTINATION}/pkgconfig/hrpsys-base.pc) # basic
    execute_process(COMMAND sed -i s@{prefix}/bin@${prefix}/lib/hrpsys@g \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_LIB_DESTINATION}/pkgconfig/hrpsys-base.pc) # basic
    execute_process(COMMAND sed -i s@${PROJECT_SOURCE_DIR}/share@\\\${prefix}/share/hrpsys/share@g \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_LIB_DESTINATION}/pkgconfig/hrpsys-base.pc) # basic
