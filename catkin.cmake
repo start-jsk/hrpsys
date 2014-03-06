@@ -191,9 +191,11 @@ string(REGEX REPLACE "\n" ";" _lib_files ${_lib_files})
 foreach(_lib_file ${_lib_files})
   get_filename_component(_lib_file_name ${_lib_file} NAME)
   if ("${_lib_file}" MATCHES "lib/python*")
+    # install all python code
     string(REGEX REPLACE "${CATKIN_DEVEL_PREFIX}/lib" "" _py_file ${_lib_file})
     get_filename_component(_py_file_dir ${_py_file} PATH)
-    install(PROGRAMS ${CATKIN_DEVEL_PREFIX}/lib/${_py_file} DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${_py_file_dir})
+    #install(PROGRAMS ${CATKIN_DEVEL_PREFIX}/lib/${_py_file} DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${_py_file_dir})
+    install(DIRECTORY ${CATKIN_DEVEL_PREFIX}/lib/${_py_file_dir}/ DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${_py_file_dir})
   elseif ("${_lib_file_name}" MATCHES "libhrp.*so")     # libhrpsys*.so and libhrpIo.so remains in global directory
     install(PROGRAMS ${CATKIN_DEVEL_PREFIX}/lib/${_lib_file_name} DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
   endif()
