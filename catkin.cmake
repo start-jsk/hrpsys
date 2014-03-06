@@ -167,6 +167,39 @@ install(DIRECTORY test share
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
   USE_SOURCE_PERMISSIONS)
 
+## copy CATKIN_DEVEL_PREFIX/lib directory
+execute_process(
+  COMMAND grep ${CATKIN_DEVEL_PREFIX}/bin ${CMAKE_CURRENT_BINARY_DIR}/build/hrpsys-base/install_manifest.txt
+  OUTPUT_VARIABLE _bin_files
+  RESULT_VARIABLE _grep_failed)
+if (_grep_failed)
+  message(FATAL_ERROR "grep : ${CMAKE_CURRENT_BINARY_DIR}/build/hrpsys-base/install_manifest.txt ${_make_failed}")
+endif(_grep_failed)
+string(REGEX REPLACE "\n" ";" _bin_files ${_bin_files})
+foreach(_bin_file ${_bin_files})
+  get_filename_component(_bin_file_name ${_bin_file} NAME)
+  install(PROGRAMS ${CATKIN_DEVEL_PREFIX}/lib/${PROJECT_NAME}/${_bin_file_name} DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${PROJECT_NAME})
+endforeach()
+execute_process(
+  COMMAND grep ${CATKIN_DEVEL_PREFIX}/lib/ ${CMAKE_CURRENT_BINARY_DIR}/build/hrpsys-base/install_manifest.txt
+  OUTPUT_VARIABLE _lib_files
+  RESULT_VARIABLE _grep_failed)
+if (_grep_failed)
+  message(FATAL_ERROR "grep : ${CMAKE_CURRENT_BINARY_DIR}/build/hrpsys-base/install_manifest.txt ${_grep_failed}")
+endif(_grep_failed)
+string(REGEX REPLACE "\n" ";" _lib_files ${_lib_files})
+foreach(_lib_file ${_lib_files})
+  get_filename_component(_lib_file_name ${_lib_file} NAME)
+  if ("${_lib_file}" MATCHES "lib/python*")
+    string(REGEX REPLACE "${CATKIN_DEVEL_PREFIX}/lib" "" _py_file ${_lib_file})
+    get_filename_component(_py_file_dir ${_py_file} PATH)
+    install(PROGRAMS ${CATKIN_DEVEL_PREFIX}/lib/${_py_file} DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}/${_py_file_dir})
+  elseif ("${_lib_file_name}" MATCHES "libhrp.*so")     # libhrpsys*.so and libhrpIo.so remains in global directory
+    install(PROGRAMS ${CATKIN_DEVEL_PREFIX}/lib/${_lib_file_name} DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION})
+  endif()
+endforeach()
+## done copy libs
+
 install(CODE
   "execute_process(COMMAND echo \"fix ${_conf_file} ${PROJECT_SOURCE_DIR} -> ${CMAKE_INSTALL_PREFIX}\")
    execute_process(COMMAND echo \"                  ${openhrp3_SOURCE_DIR} -> ${CMAKE_INSTALL_PREFIX}/share/openhrp3\")
