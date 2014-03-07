@@ -17,4 +17,4 @@ clean: Makefile.hrpsys-base
 	-rm -fr installed include bin lib idl idl_gen msg msg_gen srv srv_gen src_gen
 
 download:
-	make -f Makefile.hrpsys-base download -j${PARALLEL_JOB}
+	make -f Makefile.hrpsys-base download -j${PARALLEL_JOB} -l${PARALLEL_JOB}
