@@ -7,6 +7,10 @@ PATCH_DIR = $(CURDIR)
 SVN_URL = http://hrpsys-base.googlecode.com/svn/tags/315.1.8
 #SVN_REVISION=-r@REVISION@
 SVN_PATCH   = ${PATCH_DIR}/patch/qhull.patch ${PATCH_DIR}/patch/boost.patch
+#if arch
+ifeq (,$(wildcard /etc/debian_version)) #if debian_version exists
+SVN_PATCH  += ${PATCH_DIR}/patch/python.patch
+endif
 SVN_CMDLINE = svn --non-interactive --trust-server-cert
 
 OPENRTM_DIR ?= $(shell rospack find openrtm_aist)
