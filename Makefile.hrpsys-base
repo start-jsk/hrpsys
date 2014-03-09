@@ -6,7 +6,7 @@ PATCH_DIR = $(CURDIR)
 #SVN_URL = https://hrpsys-base.googlecode.com/svn/trunk
 SVN_URL = http://hrpsys-base.googlecode.com/svn/tags/315.1.8
 #SVN_REVISION=-r@REVISION@
-SVN_PATCH   = ${PATCH_DIR}/patch/qhull.patch
+SVN_PATCH   = ${PATCH_DIR}/patch/qhull.patch ${PATCH_DIR}/patch/boost.patch
 SVN_CMDLINE = svn --non-interactive --trust-server-cert
 
 OPENRTM_DIR ?= $(shell rospack find openrtm_aist)
