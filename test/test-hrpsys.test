@@ -17,7 +17,7 @@
         args="$(find hrpsys)/share/hrpsys/samples/PA10/PA10monitor.xml" / -->
 
 
-  <test test-name="config_hostname" pkg="hrpsys" type="test-hostname.py" />
-  <test test-name="pkgconfig" pkg="hrpsys" type="test-pkgconfig.py" />
-  <test test-name="hrpsys_config" pkg="hrpsys" type="test-hrpsysconf.py" />
+  <test test-name="hrpsys_hostname" pkg="hrpsys" type="test-hostname.py" />
+  <test test-name="hrpsys_pkgconfig" pkg="hrpsys" type="test-pkgconfig.py" />
+  <test test-name="hrpsys_hrpsysconfig" pkg="hrpsys" type="test-hrpsysconf.py" args="--host 127.0.0.1 --port 2809"/>
 </launch>
