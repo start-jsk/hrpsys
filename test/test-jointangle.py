@@ -22,6 +22,7 @@ class PA10(HrpsysConfigurator):
             ['seq', "SequencePlayer"],
             ['sh', "StateHolder"],
             ['fk', "ForwardKinematics"],
+            ['log', "DataLogger"],
             ]
 
 
@@ -32,6 +33,13 @@ class TestJointAngle(unittest.TestCase):
     def setUpClass(self):
         h = PA10()
         h.init(robotname="PA10Controller(Robot)0")
+
+    def test_set_if_find_log(self):
+        h = PA10()
+        h.findComps()
+        print >>sys.stderr, "log=",h.log, "log_svc=",h.log_svc
+        self.assertTrue(h.log)
+        self.assertTrue(h.log_svc)
 
     def test_get_joint_angles(self):
         h = PA10()

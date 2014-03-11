@@ -8,5 +8,5 @@
 
   <node name="colcheck" pkg="hrpsys" type="CollisionDetectorComp" output="screen"  cwd="node" />
 
-  <test test-name="testcolcheck" pkg="hrpsys" type="test-colcheck.py" />
+  <test test-name="colcheck" pkg="hrpsys" type="test-colcheck.py" />
 </launch>
