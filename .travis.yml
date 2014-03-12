@@ -32,7 +32,7 @@ before_install: # Use this to prepare the system to install prerequisites or dep
   - if [ $ROSWS == rosws ]; then sudo apt-get install -qq -y python-rosinstall     ; fi
   # Setup rosdep
   - sudo rosdep init
-  - rosdep update
+  - rosdep update; while [ $? != 0 ]; do sleep 1; rosdep update; done
 install: # Use this to install any prerequisites or dependencies necessary to run your build
   # Create workspace
   - mkdir -p ~/ros/ws_$REPOSITORY_NAME/src
