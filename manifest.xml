@@ -32,6 +32,9 @@
   <rosdep name="doxygen" />
   <rosdep name="mk" />
   <rosdep name="rostest" />
+  <rosdep name="rosbuild" />
+  <rosdep name="roslang" />
+
 </package>
 
 
