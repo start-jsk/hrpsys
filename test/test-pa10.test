@@ -11,6 +11,6 @@
         args='-o "manager.modules.preload:hrpEC.so,RobotHardware.so,SequencePlayer.so,StateHolder.so,ForwardKinematics.so" -o "manager.components.precreate:RobotHardware" -f $(find hrpsys)/share/hrpsys/samples/PA10/rtc.conf -o "example.RobotHardware.config_file:$(find hrpsys)/share/hrpsys/samples/PA10/RobotHardware.conf" -o "example.SequencePlayer.config_file:$(find hrpsys)/share/hrpsys/samples/PA10/PA10.conf" -o "example.StateHolder.config_file:$(find hrpsys)/share/hrpsys/samples/PA10/PA10.conf" -o "example.ForwardKinematics.config_file:$(find hrpsys)/share/hrpsys/samples/PA10/PA10.conf" -o "corba.nameservers:localhost:2809" '
         output="screen"  cwd="node" />
 
-  <test test-name="pa10_jointangle" pkg="hrpsys" type="test-jointangle.py" />
-  <test test-name="pa10_hrpsysconf" pkg="hrpsys" type="test-hrpsysconf.py" args="--host 127.0.0.1 --port 2809"/>
+  <test test-name="pa10_jointangle" pkg="hrpsys" type="test-jointangle.py" retry="2" />
+  <test test-name="pa10_hrpsysconf" pkg="hrpsys" type="test-hrpsysconf.py" args="--host 127.0.0.1 --port 2809" retry="2" />
 </launch>
