@@ -29,8 +29,9 @@ before_install: # Use this to prepare the system to install prerequisites or dep
   - sudo sh -c 'echo "deb http://packages.ros.org/ros-shadow-fixed/ubuntu precise main" > /etc/apt/sources.list.d/ros-latest.list'
   - wget http://packages.ros.org/ros.key -O - | sudo apt-key add -
   - sudo apt-get update -qq
-  - sudo apt-get install -qq -y python-catkin-pkg python-rosdep python-wstool ros-$ROS_DISTRO-catkin ros-$ROS_DISTRO-ros
+  - sudo apt-get install -qq -y python-catkin-pkg python-rosdep python-wstool ros-$ROS_DISTRO-catkin
   - if [ $ROSWS == rosws ]; then sudo apt-get install -qq -y python-rosinstall     ; fi
+  - if [ $BUILDER == rosbuild ]; then sudo apt-get install -qq -y ros-$ROS_DISTRO-rosmake ; fi
   # Setup rosdep
   - sudo rosdep init
   - rosdep update; while [ $? != 0 ]; do sleep 1; rosdep update; done
@@ -47,7 +48,9 @@ install: # Use this to install any prerequisites or dependencies necessary to ru
   - ln -s $CI_SOURCE_PATH . # Link the repo we are testing to the new workspace
   - cd ../
   # Install dependencies for source repos
+  - find -L src -name package.xml -exec dirname {} \; | xargs -n 1 -i find {} -name manifest.xml | xargs -n 1 -i mv {} {}.deprecated # rename manifest.xml for rosdep install
   - rosdep install -r -n --from-paths src --ignore-src --rosdistro $ROS_DISTRO -y
+  - find -L src -name manifest.xml.deprecated | xargs -n 1 -i dirname {} | xargs -n 1 -i ln -sf `pwd`/{}/manifest.xml.deprecated `pwd`/{}/manifest.xml # rename manifest.xml for rosdep install
   - find . \! -path "*/.*" -type f | xargs egrep -i "(hoge|fuga)" ; if [ $? == 0 ]; then exit 1; fi
 before_script: # Use this to prepare your build for testing e.g. copy database configurations, environment variables, etc.
   - source /opt/ros/$ROS_DISTRO/setup.bash
