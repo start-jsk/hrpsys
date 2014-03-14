@@ -11,3 +11,10 @@ execute_process(COMMAND cmake -E chdir ${PROJECT_SOURCE_DIR} make -f Makefile.hr
 if (_make_failed)
   message(FATAL_ERROR "Build of hrpsys failed")
 endif(_make_failed)
+
+rosbuild_init()
+
+rosbuild_add_rostest(test/test-hrpsys.test)
+rosbuild_add_rostest(test/test-colcheck.test)
+rosbuild_add_rostest(test/test-pa10.test)
+rosbuild_add_rostest(test/test-simulator.test)
