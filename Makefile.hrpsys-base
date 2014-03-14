@@ -7,7 +7,7 @@ SVN_URL = http://hrpsys-base.googlecode.com/svn/tags/315.1.9
 #SVN_REVISION=-r@REVISION@
 
 OPENRTM_DIR ?= $(shell rospack find openrtm_aist)
-PKG_CONFIG_PATH ?= $(shell rospack find openrtm_aist)/lib/pkgconfig:$(shell rospack find openhrp3)/lib/pkgconfig:$(PKG_CONFIG_PATH)
+PKG_CONFIG_PATH := $(shell rospack find openrtm_aist)/lib/pkgconfig:$(shell rospack find openhrp3)/lib/pkgconfig:$(PKG_CONFIG_PATH)
 MK_DIR       = $(shell rospack find mk)
 NUM_OF_CPUS = $(shell grep -c '^processor' /proc/cpuinfo)
 

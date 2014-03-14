@@ -69,7 +69,7 @@ script: # All commands must exit with code 0 on success. Anything else is consid
   # for rosbuild
   - if [ $BUILDER == rosbuild ]; then rosmake -a --profile --pjobs=8       ; fi
   - if [ $BUILDER == rosbuild ]; then export TARGET_PKG=`find -L src | grep $REPOSITORY_NAME | grep /build/Makefile$ | sed s@.*/\\\\\([^\/]*\\\\\)/build/Makefile@\\\1@g` ; fi
-  - if [ $BUILDER == rosbuild ]; then rosmake --test-only $TARGET_PKG      ; fi
+  - if [ $BUILDER == rosbuild ]; then PKG_CONFIG_PATH=`rospack find openhrp3`/lib/pkgconfig:`rospack find hrpsys`/lib/pkgconfig:$PKG_CONFIG_PATH rosmake --test-only $TARGET_PKG      ; fi
 after_failure:
   - find ${HOME}/.ros/test_results -type f -exec echo "=== {} ===" \; -exec cat {} \;
   - for file in ${HOME}/.ros/log/rostest-*; do echo "=== $file ==="; cat $file; done
