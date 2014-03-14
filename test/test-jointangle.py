@@ -3,6 +3,13 @@
 PKG = 'hrpsys'
 NAME = 'test-hostname'
 
+import imp  ## for rosbuild
+try:
+    imp.find_module(PKG)
+except:
+    import roslib; roslib.load_manifest(PKG)
+
+
 import os
 import sys
 import time
