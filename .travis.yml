@@ -10,6 +10,7 @@ python:
 compiler:
   - gcc
 env:
+  - ROS_DISTRO=groovy ROSWS=rosws  BUILDER=rosbuild  USE_DEB=true
   - ROS_DISTRO=groovy ROSWS=rosws  BUILDER=rosbuild  USE_DEB=false
   - ROS_DISTRO=groovy ROSWS=wstool BUILDER=catkin    USE_DEB=true
   - ROS_DISTRO=groovy ROSWS=wstool BUILDER=catkin    USE_DEB=false
@@ -39,12 +40,12 @@ install: # Use this to install any prerequisites or dependencies necessary to ru
   # Create workspace
   - mkdir -p ~/ros/ws_$REPOSITORY_NAME/src
   - cd ~/ros/ws_$REPOSITORY_NAME/src
-  - if [ $USE_DEB == false ]; then $ROSWS init .   ; fi
+  - if [ $USE_DEB == false -o $BUILDER == rosbuild ]; then $ROSWS init .   ; fi
   - if [ $USE_DEB == false ]; then $ROSWS merge http://raw.github.com/$TRAVIS_REPO_SLUG/$TRAVIS_BRANCH/.rosinstall ; fi
-  - if [ $USE_DEB == false ]; then if [ $ROSWS == rosws ]; then $ROSWS merge /opt/ros/$ROS_DISTRO/.rosinstall; fi  ; fi
+  - if [ $USE_DEB == false -o $BUILDER == rosbuild ]; then if [ $ROSWS == rosws ]; then $ROSWS merge /opt/ros/$ROS_DISTRO/.rosinstall; fi  ; fi
   - if [ $USE_DEB == false ]; then sed -i "s@^\(.*github.com/$TRAVIS_REPO_SLUG.*\)@#\1@" .rosinstall               ; fi # comment out current repo
   - if [ $USE_DEB == false ]; then $ROSWS update   ; fi
-  - if [ $USE_DEB == false ]; then $ROSWS set $REPOSITORY_NAME http://github.com/$TRAVIS_REPO_SLUG --git -y        ; fi
+  - if [ $USE_DEB == false -o $BUILDER == rosbuild ]; then $ROSWS set $REPOSITORY_NAME http://github.com/$TRAVIS_REPO_SLUG --git -y        ; fi
   - ln -s $CI_SOURCE_PATH . # Link the repo we are testing to the new workspace
   - cd ../
   # Install dependencies for source repos
@@ -69,7 +70,7 @@ script: # All commands must exit with code 0 on success. Anything else is consid
   # for rosbuild
   - if [ $BUILDER == rosbuild ]; then rosmake -a --profile --pjobs=8       ; fi
   - if [ $BUILDER == rosbuild ]; then export TARGET_PKG=`find -L src | grep $REPOSITORY_NAME | grep /build/Makefile$ | sed s@.*/\\\\\([^\/]*\\\\\)/build/Makefile@\\\1@g` ; fi
-  - if [ $BUILDER == rosbuild ]; then PKG_CONFIG_PATH=`rospack find openhrp3`/lib/pkgconfig:`rospack find hrpsys`/lib/pkgconfig:$PKG_CONFIG_PATH rosmake --test-only $TARGET_PKG      ; fi
+  - if [ $BUILDER == rosbuild ]; then rosmake --test-only $TARGET_PKG      ; fi
 after_failure:
   - find ${HOME}/.ros/test_results -type f -exec echo "=== {} ===" \; -exec cat {} \;
   - for file in ${HOME}/.ros/log/rostest-*; do echo "=== $file ==="; cat $file; done
