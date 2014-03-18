@@ -6,6 +6,8 @@
   <env name="ROS_HOME" value="$(find hrpsys)/share/hrpsys/samples/PA10/" />
   <!-- END:common setting -->
 
+  <node name="start_omninames" pkg="hrpsys" type="start_omninames.sh" args="2809" />
+
   <node name="modelloader" pkg="openhrp3" type="openhrp-model-loader" output="screen"/>
   <node name="hrpsys" pkg="openrtm_aist" type="rtcd"
         args='-o "manager.modules.preload:hrpEC.so,RobotHardware.so,SequencePlayer.so,StateHolder.so,ForwardKinematics.so" -o "manager.components.precreate:RobotHardware" -f $(find hrpsys)/share/hrpsys/samples/PA10/rtc.conf -o "example.RobotHardware.config_file:$(find hrpsys)/share/hrpsys/samples/PA10/RobotHardware.conf" -o "example.SequencePlayer.config_file:$(find hrpsys)/share/hrpsys/samples/PA10/PA10.conf" -o "example.StateHolder.config_file:$(find hrpsys)/share/hrpsys/samples/PA10/PA10.conf" -o "example.ForwardKinematics.config_file:$(find hrpsys)/share/hrpsys/samples/PA10/PA10.conf" -o "corba.nameservers:localhost:2809" '
