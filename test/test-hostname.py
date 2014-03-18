@@ -12,6 +12,7 @@ import rtm
 import unittest
 import rostest
 import sys
+import time
 
 class TestHrpsysHostname(unittest.TestCase):
 
@@ -21,12 +22,18 @@ class TestHrpsysHostname(unittest.TestCase):
             rtm.nshost = nshost
             rtm.nsport = nsport
             rtm.initCORBA()
-            ms = rtm.findRTCmanager()
-            rh = rtm.findRTC("RobotHardware0")
+            count = 0
+            while ( not (ms and rh) ) and count < 10:
+                ms = rtm.findRTCmanager()
+                rh = rtm.findRTC("RobotHardware0")
+                if ms and rh :
+                    break
+                time.sleep(1)
+                print >>sys.stderr, "wait for RTCmanager=%r, RTC(RobotHardware0)=%r"%(ms,rh)
+                count += 1
             self.assertTrue(ms and rh)
         except Exception as e:
-            print "{0}, RTCmanager={1}, RTC(RobotHardware0)={2}".format(str(e),ms,rh)
-            self.fail()
+            self.fail("%r, nshost=%r, nsport=%r RTCmanager=%r, RTC(RobotHardware0)=%r"%(str(e),nshost,nsport,ms,rh))
             pass
 
     def test_gethostname(self):
