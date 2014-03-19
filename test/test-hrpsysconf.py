@@ -3,7 +3,11 @@
 PKG = 'hrpsys'
 NAME = 'test-hrpsys-config'
 
-import roslib; roslib.load_manifest('hrpsys')
+import imp  ## for rosbuild
+try:
+    imp.find_module(PKG)
+except:
+    import roslib; roslib.load_manifest(PKG)
 
 from hrpsys.hrpsys_config import *
 from hrpsys import rtm
