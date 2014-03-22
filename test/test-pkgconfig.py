@@ -26,6 +26,34 @@ class TestHrpsysPkgconfig(unittest.TestCase):
         if os.path.exists(os.path.join(hrpsys_path, "bin")) :
             self.PKG_CONFIG_PATH='PKG_CONFIG_PATH=%s/lib/pkgconfig:%s/lib/pkgconfig:$PKG_CONFIG_PATH'%(hrpsys_path, openhrp3_path)
 
+    def pkg_config_variable(self, var):
+        return check_output("%s pkg-config hrpsys-base --variable=%s"%(self.PKG_CONFIG_PATH, var), shell=True).rstrip()
+
+    def check_if_file_exists(self, var, fname):
+        pkg_var = var
+        pkg_dname = self.pkg_config_variable(pkg_var)
+        pkg_path = os.path.join(pkg_dname, fname)
+        pkg_ret = os.path.exists(pkg_path)
+        self.assertTrue(pkg_ret, "pkg-config hrpsys --variable=%s`/%s (%s) returns %r"%(pkg_var, fname, pkg_path, pkg_ret))
+
+
+    def check_if_file_exists_from_rospack(self, fname):
+        pkg_dname = check_output(['rospack','find','hrpsys']).rstrip()
+        pkg_path = os.path.join(pkg_dname, fname)
+        pkg_ret = os.path.exists(pkg_path)
+        self.assertTrue(pkg_ret, "`rospack find hrpsys`(%s) returns %r"%(pkg_path, pkg_ret))
+
+    def test_files_for_hrpsys(self):
+        # https://github.com/start-jsk/hrpsys/blob/master/test/test-pa10.test#L13
+        self.check_if_file_exists_from_rospack("share/hrpsys/samples/PA10/")
+        self.check_if_file_exists_from_rospack("share/hrpsys/samples/PA10/rtc.conf")
+        self.check_if_file_exists_from_rospack("share/hrpsys/samples/PA10/RobotHardware.conf")
+        self.check_if_file_exists_from_rospack("share/hrpsys/samples/PA10/PA10.conf")
+
+    def test_files_for_hrpsys_ros_bridge(self):
+        # https://github.com/start-jsk/rtmros_common/blob/master/hrpsys_ros_bridge/catkin.cmake#L50
+        self.check_if_file_exists("idldir", "HRPDataTypes.idl")
+
     def test_compile_iob(self):
         global PID
         cmd = "%s pkg-config hrpsys-base --cflags --libs"%(self.PKG_CONFIG_PATH)
