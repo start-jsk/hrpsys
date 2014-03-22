@@ -1,0 +1,5 @@
+model: file://@OPENHRP3_SAMPLE_DIR@/model/sample1.wrl
+exec_cxt.periodic.type: hrpExecutionContext
+exec_cxt.periodic.rate: 500
+
+

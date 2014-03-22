@@ -36,6 +36,13 @@ if(NOT EXISTS ${openhrp3_PACKAGE_PATH}/bin) ## openhrp3 is installed via deb
   endforeach()
 endif()
 
+## sample/samplerobots
+set(OPENHRP3_SAMPLE_DIR "${openhrp3_PACKAGE_PATH}/share/OpenHRP-3.1/sample")
+configure_file(${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.conf.in ${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.conf)
+configure_file(${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.xml.in  ${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.xml)
+configure_file(${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.RobotHardware.conf.in
+               ${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.RobotHardware.conf)
+
 rosbuild_add_rostest(test/test-hrpsys.test)
 rosbuild_add_rostest(test/test-colcheck.test)
 rosbuild_add_rostest(test/test-pa10.test)
