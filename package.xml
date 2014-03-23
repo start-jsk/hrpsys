@@ -37,6 +37,8 @@
   <build_depend>sdl</build_depend>
   <build_depend>subversion</build_depend>
 
+  <build_depend>rosbash</build_depend> <!-- temporarily until openrtm_aist_core provides rosbash -->
+
   <run_depend>glut</run_depend>
   <run_depend>libirrlicht-dev</run_depend>
   <run_depend>libqhull</run_depend>
@@ -46,6 +48,8 @@
   <run_depend>openhrp3</run_depend>
   <run_depend>python-tk</run_depend>
   <run_depend>sdl</run_depend>
+
+  <run_depend>rosbash</run_depend> <!-- temporarily until openrtm_aist_core provides rosbash -->
 
   <!-- <test_depend>openhrp3</test_depend> -->
 

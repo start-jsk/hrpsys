@@ -3,7 +3,12 @@
 PKG = 'hrpsys'
 NAME = 'test-colcheck'
 
-import roslib; roslib.load_manifest('hrpsys')
+import imp  ## for rosbuild
+try:
+    imp.find_module(PKG)
+except:
+    import roslib; roslib.load_manifest(PKG)
+
 from hrpsys import hrpsys_config
 
 import socket
