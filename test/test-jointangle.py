@@ -60,6 +60,15 @@ class TestJointAngle(unittest.TestCase):
         self.assertTrue(h.setJointAngles(h.getJointAngles(),1))
         self.assertEqual(h.waitInterpolation(), None)
 
+        import random
+        a = [(360*random.random()-180) for i in xrange(len(h.getJointAngles()))]
+        self.assertTrue(h.setJointAngles(a,2))
+        self.assertEqual(h.waitInterpolation(), None)
+
+        a = [0 for i in xrange(len(h.getJointAngles()))]
+        self.assertTrue(h.setJointAngles(a,2))
+        self.assertEqual(h.waitInterpolation(), None)
+
 #unittest.main()
 if __name__ == '__main__':
     rostest.run(PKG, NAME, TestJointAngle, sys.argv)
