@@ -153,6 +153,15 @@ endif(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
 catkin_package(
 )
 
+## sample/samplerobots
+set(ENV{PKG_CONFIG_PATH} ${CATKIN_DEVEL_PREFIX}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH})
+execute_process(COMMAND pkg-config openhrp3.1   --variable=idl_dir      OUTPUT_VARIABLE hrp_idldir   OUTPUT_STRIP_TRAILING_WHITESPACE)
+get_filename_component(OPENHRP3_SAMPLE_DIR "${hrp_idldir}/../sample" ABSOLUTE)
+configure_file(${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.conf.in ${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.conf)
+configure_file(${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.xml.in  ${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.xml)
+configure_file(${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.RobotHardware.conf.in
+               ${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.RobotHardware.conf)
+
 # #
 install(
   DIRECTORY ${CATKIN_DEVEL_PREFIX}/include/hrpsys
@@ -163,7 +172,7 @@ install(
 install(DIRECTORY lib/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/lib
   USE_SOURCE_PERMISSIONS)
-install(DIRECTORY test share
+install(DIRECTORY test share samples
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
   USE_SOURCE_PERMISSIONS)
 
@@ -209,7 +218,8 @@ install(CODE
    endif()
    execute_process(COMMAND echo \"                  ${CATKIN_DEVEL_PREFIX} -> ${CMAKE_INSTALL_PREFIX}\")
    file(GLOB _conf_files \"\$ENV{DISTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/share/hrpsys/samples/*/*.*\")
-   foreach(_conf_file \${_conf_files})
+   file(GLOB _sample_files \"\$ENV{DISTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/samples/samplerobot/*.*\")
+   foreach(_conf_file \${_conf_files} \${_sample_files})
      execute_process(COMMAND echo \"fix \${_conf_file}\")
      if (EXISTS ${openhrp3_SOURCE_DIR})
        execute_process(COMMAND sed -i s@${openhrp3_SOURCE_DIR}/share/OpenHRP-3.1@${openhrp3_PREFIX}/share/openhrp3/share/OpenHRP-3.1@g \${_conf_file})
@@ -234,4 +244,6 @@ add_rostest(test/test-hrpsys.test)
 add_rostest(test/test-colcheck.test)
 add_rostest(test/test-pa10.test)
 add_rostest(test/test-simulator.test)
+
+
 

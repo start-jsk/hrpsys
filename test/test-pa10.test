@@ -1,18 +1,11 @@
 <launch>
-  <!-- BEGIN:common setting -->
-  <env name="LANG" value="C" />
-  <env name="ORBgiopMaxMsgSize" value="2147483648" />
-  <!-- env name="PROJECT_DIR" value="$(find hrpsys)" / -->
-  <env name="ROS_HOME" value="$(find hrpsys)/share/hrpsys/samples/PA10/" />
-  <!-- END:common setting -->
+  <include file="$(find hrpsys)/samples/pa10.launch" >
+    <arg name="GUI" value="false" />
+    <arg name="corbaport" value="2809" />
+  </include>
 
-  <node name="start_omninames" pkg="hrpsys" type="start_omninames.sh" args="2809" />
-
-  <node name="modelloader" pkg="openhrp3" type="openhrp-model-loader" output="screen"/>
-  <node name="hrpsys" pkg="openrtm_aist" type="rtcd"
-        args='-o "manager.modules.preload:hrpEC.so,RobotHardware.so,SequencePlayer.so,StateHolder.so,ForwardKinematics.so" -o "manager.components.precreate:RobotHardware" -f $(find hrpsys)/share/hrpsys/samples/PA10/rtc.conf -o "example.RobotHardware.config_file:$(find hrpsys)/share/hrpsys/samples/PA10/RobotHardware.conf" -o "example.SequencePlayer.config_file:$(find hrpsys)/share/hrpsys/samples/PA10/PA10.conf" -o "example.StateHolder.config_file:$(find hrpsys)/share/hrpsys/samples/PA10/PA10.conf" -o "example.ForwardKinematics.config_file:$(find hrpsys)/share/hrpsys/samples/PA10/PA10.conf" -o "corba.nameservers:localhost:2809" '
-        output="screen"  cwd="node" />
-
+  <test test-name="pa10_sample" pkg="hrpsys" type="pa10-jointangle.py"
+        args="-ORBInitRef NameService=corbaloc:iiop:localhost:2809/NameService" retry="2" />
   <test test-name="pa10_jointangle" pkg="hrpsys" type="test-jointangle.py" retry="2" />
   <test test-name="pa10_hrpsysconf" pkg="hrpsys" type="test-hrpsysconf.py" args="--host 127.0.0.1 --port 2809" retry="2" />
 </launch>
