@@ -1,0 +1,50 @@
+Index: cmake_modules/FindQuickHull.cmake
+===================================================================
+--- cmake_modules/FindQuickHull.cmake
++++ cmake_modules/FindQuickHull.cmake
+@@ -1,6 +1,6 @@
+ FIND_PATH(
+ QHULL_DIR
+-NAMES include/qhull/qhull.h
++NAMES include/libqhull/libqhull.h
+ PATHS /usr /usr/local
+ DOC "the top directory of qhull")
+ 
+Index: lib/util/BVutil.cpp
+===================================================================
+--- lib/util/BVutil.cpp
++++ lib/util/BVutil.cpp
+@@ -1,6 +1,6 @@
+ #include <iostream>
+ extern "C" {
+-#include <qhull/qhull_a.h>
++#include <libqhull/qhull_a.h>
+ }
+ #include <hrpModel/Link.h>
+ #include "BVutil.h" 
+Index: rtc/CollisionDetector/SetupCollisionPair.cpp
+===================================================================
+--- rtc/CollisionDetector/SetupCollisionPair.cpp
++++ rtc/CollisionDetector/SetupCollisionPair.cpp
+@@ -16,7 +16,7 @@
+ #include <hrpCollision/ColdetModel.h>
+ #include "CollisionDetector.h"
+ extern "C" {
+-#include <qhull/qhull_a.h>
++#include <libqhull/qhull_a.h>
+ }
+ 
+ #define deg2rad(x)	((x)*M_PI/180)
+Index: rtc/CollisionDetector/vclip_1.0/src/PolyTree.C
+===================================================================
+--- rtc/CollisionDetector/vclip_1.0/src/PolyTree.C
++++ rtc/CollisionDetector/vclip_1.0/src/PolyTree.C
+@@ -58,7 +58,7 @@
+ 
+ #if QHULL
+ extern "C" {
+-#include "qhull/qhull_a.h"
++#include "libqhull/qhull_a.h"
+ }
+ //char qh_version[] = "vclip 1.0";
+ #endif

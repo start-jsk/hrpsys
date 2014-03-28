@@ -20,6 +20,7 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
     INSTALL_DIR=${CATKIN_DEVEL_PREFIX}
     OPENRTM_DIR='' # keep blank so that FindOpenRTM.cmake uses rtm-config
     MK_DIR=${mk_PREFIX}/share/mk
+    PATCH_DIR=${PROJECT_SOURCE_DIR}
     PKG_CONFIG_PATH=${openhrp3_PREFIX}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH} # for openrtm3.1.pc
     installed
     RESULT_VARIABLE _make_failed)
