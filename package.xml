@@ -4,7 +4,12 @@
   <description>
    <p>An <a href = "http://www.openrtm.org/pub/OpenRTM-aist/">OpenRTM-aist</a>-based robot controller. This package is the most tailored for humanoid (dual-arm and/or biped) robots for historical reason.</p>
    <p>hrpsys package does not only wraps but build and installs the code from its mainstream repository (<a href = "https://code.google.com/p/hrpsys-base/source/browse/#svn%2Ftrunk">code.google.com/p/hrpsys-base</a>).</p>
-   <p>The package version number is synchronized to that of mainstream, based on <a href = "http://code.google.com/p/rtm-ros-robotics/issues/detail?id=165#c5">this decision</a>.
+   <p>The package version number is synchronized to that of mainstream, based on <a href = "http://code.google.com/p/rtm-ros-robotics/issues/detail?id=165#c5">this decision</a>. Its semantics:<br />
+    <ul>
+     <li><b>MAJOR</b>: Synchronized with <a href = "http://wiki.ros.org/openhrp3">OpenHRP3</a></li>
+     <li><b>MINOR</b>: Indicate IDL compatibility (packages with different version numbers in this section are NOT compatible)</li>
+     <li><b>PATCH</b>: Packages with different version numbers in this section ARE compatible.</li>
+    </ul>
    </p>
   </description>
 
