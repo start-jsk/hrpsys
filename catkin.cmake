@@ -12,6 +12,9 @@ find_package(catkin REQUIRED COMPONENTS rostest mk openrtm_aist openhrp3)
 # <install>/lib/<package>/RobotHardware # rosrun hrpsys RobtoHardware works
 # <install>/lib/RobotHardware.so # so that `rospack find hrspsys`/lib can find .so
 # <install>/<package>/share
+if(NOT hrpsys_FOUND)
+  file(REMOVE ${CMAKE_CURRENT_BINARY_DIR}/installed)
+endif()
 if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
   set(ENV{PATH} ${openrtm_aist_PREFIX}/lib/openrtm_aist/bin/:$ENV{PATH}) #update PATH for rtm-config
   execute_process(
