@@ -21,18 +21,15 @@ NUM_OF_CPUS = $(shell grep -c '^processor' /proc/cpuinfo)
 
 include $(MK_DIR)/git_checkout.mk
 
-
-patched_no_makefile: $(GIT_DIR) $(GIT_PATCH) ## copy from git_checkout.mk
+installed: $(GIT_DIR) $(GIT_PATCH) 
 	@echo "patch hrpsys-base ... "
 	@echo "                 PATCH_DIR=$(PATCH_DIR)" 
-	cd $(GIT_DIR) && git reset --hard
+	cd $(GIT_DIR) && git reset --hard && git checkout $(GIT_REVISION)
 ifneq ($(strip $(GIT_PATCH)),)
 	$(foreach PATCH, $(GIT_PATCH), patch -d $(GIT_DIR) -p0 < $(PATCH) && ) echo patched
 	touch rospack_nosubdirs
 	touch patched
 endif
-
-installed: $(GIT_DIR) patched_no_makefile
 	@echo "compile hrpsys-base ... "
 	@echo "                 PATH=$(PATH)"
 	@echo "                 INSTALL_DIR=$(INSTALL_DIR)"
