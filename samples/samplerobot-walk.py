@@ -8,8 +8,13 @@
 
 """
 
-import roslib; roslib.load_manifest("hrpsys")
-import OpenRTM_aist.RTM_IDL # for catkin
+pkg = 'hrpsys'
+import imp
+try:
+    imp.find_module(pkg)
+except:
+    import roslib
+    roslib.load_manifest(pkg)
 
 from hrpsys.hrpsys_config import *
 import OpenHRP
