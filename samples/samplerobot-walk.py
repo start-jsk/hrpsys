@@ -7,67 +7,36 @@
  $ rosrun    hrpsys samplerobot-walk.py
 
 """
-import imp, sys, os
 
-# set path to hrpsys to get import rpy, see <hrpsys>/test/test-samplerobot.py for using HrpsysConfigurator
-try: 
-    imp.find_module('hrpsys') # catkin installed
-    sys.path.append(imp.find_module('hrpsys')[1]) # set path to hrpsys
-except: # rosbuild installed
-    import rospkg
-    rp = rospkg.RosPack()
-    sys.path.append(rp.get_path('hrpsys')+'/lib/python2.7/dist-packages/hrpsys')
-    sys.path.append(rp.get_path('openrtm_aist_python')+'/lib/python2.7/dist-packages')
+pkg = 'hrpsys'
+import imp
+try:
+    imp.find_module(pkg)
+except:
+    import roslib
+    roslib.load_manifest(pkg)
 
+from hrpsys.hrpsys_config import *
+import OpenHRP
 
+def getRTCList ():
+    return [
+        ['seq', "SequencePlayer"],
+        ['sh', "StateHolder"],
+        ['fk', "ForwardKinematics"]
+        ]
 
-import rtm
-
-from rtm import *
-from OpenHRP import *
-
-def connectComps():
-    connectPorts(bridge.port("q"), seq.port("qInit"))
-    #
-    connectPorts(seq.port("qRef"), hgc.port("qIn"))
-    #
-
-def activateComps():
-    rtm.serializeComponents([bridge, seq])
-    seq.start()
-
-def createComps():
-    global bridge, seq, seq_svc, hgc
-
-    bridge = findRTC("SampleRobot(Robot)0")
-
-    ms.load("SequencePlayer")
-    seq = ms.create("SequencePlayer", "seq")
-    seq_svc = narrow(seq.service("service0"),"SequencePlayerService")
-
-    hgc = findRTC("HGcontroller0")
-
-def init():
-    global ms
-
-    ms = rtm.findRTCmanager()
-
-    print "creating components"
-    createComps()
-      
-    print "connecting components"
-    connectComps()
-
-    print "activating components"
-    activateComps()
-    print "initialized successfully"
+def init ():
+    global hcf
+    hcf = HrpsysConfigurator()
+    hcf.getRTCList = getRTCList
+    hcf.init ("SampleRobot(Robot)0")
 
 def loadPattern(basename, tm=1.0):
-    seq_svc.loadPattern(basename, tm)
-    seq_svc.waitInterpolation()
+    hcf.seq_svc.loadPattern(basename, tm)
+    hcf.seq_svc.waitInterpolation()
 
 if __name__ == '__main__':
-    initCORBA()
     init()
 
     from subprocess import check_output
