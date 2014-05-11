@@ -4,8 +4,8 @@ INSTALL_DIR ?= ${CURDIR}
 GIT_DIR = build/hrpsys-base-source
 PATCH_DIR = $(CURDIR)
 GIT_URL = https://github.com/fkanehiro/hrpsys-base.git
-GIT_REVISION = 315.1.10
-GIT_PATCH   = ${PATCH_DIR}/patch/boost.patch
+GIT_REVISION = 315.2.0
+GIT_PATCH   = 
 #if arch
 ifeq (,$(wildcard /etc/debian_version)) #if not debian_version exists
 GIT_PATCH  += ${PATCH_DIR}/patch/python.patch
