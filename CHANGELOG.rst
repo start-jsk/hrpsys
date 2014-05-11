@@ -2,8 +2,8 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+315.2.0 (2014-05-11)
+--------------------
 * update in fkanehiro/hrpsys-base repository
 * 53de9aa (hrpsys_config.py) fix getRTCList only for stable RTC
 * 69b153e (KalmanFilter, Stabilizer) adds options to disable building KalmanFilter and Stabilizer
