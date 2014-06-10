@@ -126,6 +126,21 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
     endif(_make_failed)
   endif()
 
+  # copy src
+  execute_process(
+    COMMAND cmake -E make_directory ${PROJECT_SOURCE_DIR}/src/
+    RESULT_VARIABLE _make_failed)
+  if (_make_failed)
+    message(FATAL_ERROR "make_directory ${PROJECT_SOURCE_DIR}/src failed: ${_make_failed}")
+  endif(_make_failed)
+  execute_process(
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_BINARY_DIR}/build/hrpsys-base-source/rtc/ ${PROJECT_SOURCE_DIR}/src/rtc
+    RESULT_VARIABLE _make_failed)
+    message("copy src directory ${CATKIN_DEVEL_PREFIX}/build/hrpsys-base-source/ ${PROJECT_SOURCE_DIR}/src")
+  if (_make_failed)
+    message(FATAL_ERROR "copy src failed: ${_make_failed}")
+  endif(_make_failed)
+
   message("openhrp3_SOURCE_DIR=${openhrp3_SOURCE_DIR}")
   message("    openhrp3_PREFIX=${openhrp3_PREFIX}")
   file(GLOB _conf_files "${PROJECT_SOURCE_DIR}/share/hrpsys/samples/*/*.conf" "${PROJECT_SOURCE_DIR}/share/hrpsys/samples/*/*.xml")
@@ -176,7 +191,7 @@ install(
 install(DIRECTORY lib/
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/lib
   USE_SOURCE_PERMISSIONS)
-install(DIRECTORY test share samples
+install(DIRECTORY test share samples src
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
   USE_SOURCE_PERMISSIONS)
 
