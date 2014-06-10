@@ -15,6 +15,7 @@ if [ ! -f ${HRP4C_MODEL_PATH} ]; then
             echo "[CAUTION] If you failed download for some reason, pleasy try following command manually "
             echo " sudo $command1"
             echo " sudo $command2"
+            echo " sudo chmod a+rw -R ${HRP4C_MODEL_DIR}"
         else
             echo " Congratulations! You have HRP-4C robot model under to ${HRP4C_MODEL_PATH}"
         fi
