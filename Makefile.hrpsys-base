@@ -21,7 +21,10 @@ NUM_OF_CPUS = $(shell grep -c '^processor' /proc/cpuinfo)
 
 include $(MK_DIR)/git_checkout.mk
 
-installed: $(GIT_DIR) $(GIT_PATCH) 
+disable_ssl:
+	git config --global http.sslVerify false
+
+installed: disable_ssl $(GIT_DIR) $(GIT_PATCH) 
 	@echo "patch hrpsys-base ... "
 	@echo "                 PATCH_DIR=$(PATCH_DIR)" 
 	cd $(GIT_DIR) && git reset --hard && git checkout $(GIT_REVISION)
