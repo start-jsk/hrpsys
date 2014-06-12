@@ -228,6 +228,7 @@ install(CODE
      if (EXISTS ${openhrp3_SOURCE_DIR})
        execute_process(COMMAND sed -i s@${openhrp3_SOURCE_DIR}/share/OpenHRP-3.1@${openhrp3_PREFIX}/share/openhrp3/share/OpenHRP-3.1@g \${_conf_file})
      endif()
+     execute_process(COMMAND sed -i s@${PROJECT_SOURCE_DIR}/share@${CMAKE_INSTALL_PREFIX}/share/hrpsys/share@g \${_conf_file})
      execute_process(COMMAND sed -i s@${PROJECT_SOURCE_DIR}/lib@${CMAKE_INSTALL_PREFIX}/share/hrpsys/lib@g \${_conf_file})
      execute_process(COMMAND sed -i s@${CATKIN_DEVEL_PREFIX}@${CMAKE_INSTALL_PREFIX}@g \${_conf_file})
    endforeach()
