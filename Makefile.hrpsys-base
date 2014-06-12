@@ -4,7 +4,7 @@ INSTALL_DIR ?= ${CURDIR}
 GIT_DIR = build/hrpsys-base-source
 PATCH_DIR = $(CURDIR)
 GIT_URL = https://github.com/fkanehiro/hrpsys-base.git
-GIT_REVISION = 315.2.0
+GIT_REVISION = 315.2.2
 GIT_PATCH   = 
 #if arch
 ifeq (,$(wildcard /etc/debian_version)) #if not debian_version exists
