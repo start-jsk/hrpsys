@@ -21,7 +21,7 @@
   <rosdep name="libxml2" />
   <rosdep name="libxmu-dev" />
   <rosdep name="sdl" />
-  <rosdep name="opencv2" />
+  <rosdep name="cv_bridge" />
   <rosdep name="libqhull" />
   <rosdep name="libglew-dev" />
   <rosdep name="glut" />
