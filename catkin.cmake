@@ -260,6 +260,21 @@ install(CODE
    execute_process(COMMAND sed -i s@${PROJECT_SOURCE_DIR}/share@\\\${prefix}/share/hrpsys/share@g \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_LIB_DESTINATION}/pkgconfig/hrpsys-base.pc) # basic
 ")
 
+install(CODE
+  "# check if stable rtc exists
+   message(STATUS \"check if \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_BIN_DESTINATION}/hrpsys-simulator exists\")
+   if (NOT EXISTS \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_BIN_DESTINATION}/hrpsys-simulator )
+    message(FATAL_ERROR \"FATAL_ERROR \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_BIN_DESTINATION}/hrpsys-simulator does not exists\")
+   endif()
+   # PYTHONPATH=install/lib/python2.7/dist-packages:$PYTHONPATH python -c 'from hrpsys.hrpsys_config import *; print(\";\".join(map((lambda rtc: rtc[1]), HrpsysConfigurator.__new__(HrpsysConfigurator).getRTCListUnstable())))'
+   foreach(_rtc SequencePlayer;StateHolder;ForwardKinematics;TorqueFilter;KalmanFilter;VirtualForceSensor;RemoveForceSensorLinkOffset;ImpedanceController;AutoBalancer;Stabilizer;CollisionDetector;TorqueController;SoftErrorLimiter;DataLogger)
+     message(STATUS \"check if \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/lib/\${_rtc}.so exists\")
+     if (NOT EXISTS \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/lib/\${_rtc}.so )
+       message(FATAL_ERROR \"FATAL_ERROR \$ENV{DESTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/lib/\${_rtc}.so does not exists\")
+     endif()
+   endforeach()
+")
+
 add_rostest(test/test-hrpsys.test)
 add_rostest(test/test-colcheck.test)
 add_rostest(test/test-pa10.test)
