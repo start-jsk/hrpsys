@@ -2,6 +2,21 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* (catkin.cmake) add code to check if hrpsys is installed correctly
+* manifest.xml/package.xml: depends on cv_bridge instad of opencv (https://github.com/ros/rosdistro/pull/4763)
+* add patch to use opencv2.pc for last resort
+* (catkin.cmake) install src directory for custom iob
+* fix for hrp4c.launch
+* update to hrpsys version 315.2.2
+* (catkin.cmake) install src directory for custom iob, see https://github.com/start-jsk/rtmros_gazebo/issues/35 for discussion
+* (hrp4c_model_download.sh) set rw permissions to all users for hrp4c model
+* (catkin.cmkae) use sed to fis install dir
+* sample/samplerobot-remove-force-offset.py : add sample code for RMFO rtc
+* (catkin.cmake) add disable ssl
+* Contributors: Kei Okada, Shunichi Nozawa
+
 315.2.1 (2014-05-12)
 --------------------
 * Merge pull request `#83 <https://github.com/start-jsk/hrpsys/issues/83>`_ from k-okada/add_git
