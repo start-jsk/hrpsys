@@ -2,8 +2,8 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+315.2.2 (2014-06-17)
+--------------------
 * (catkin.cmake) add code to check if hrpsys is installed correctly
 * manifest.xml/package.xml: depends on cv_bridge instad of opencv (https://github.com/ros/rosdistro/pull/4763)
 * add patch to use opencv2.pc for last resort
