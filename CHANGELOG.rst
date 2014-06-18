@@ -15,6 +15,23 @@ Changelog for package hrpsys
 * (catkin.cmkae) use sed to fis install dir
 * sample/samplerobot-remove-force-offset.py : add sample code for RMFO rtc
 * (catkin.cmake) add disable ssl
+*
+* update in fkanehiro/hrpsys-base repository
+* 74d07f9 (lib/util/CMakeLists.txt) forget to install Hrpsys.h (24c6139826)
+* 0303d15 (rtc/PlaneRemover) adds a configuration variable pointNumThd to specify the minimum number of points to define a plane#226 from orikuma/refactoring-thermo-limiter
+* f34f28b (python/rtm.py) adds return value of setConfiguration() and setProperty()
+* 85afa1c (rtc/ThermoLimiter) Removed TwoDofController, which is not used in ThermoLimiter now
+* 63f3ae7 (python/hrpsys_config.py) add getRTCList for unstable RTCs
+* 9eb3a12 (rtc/SORFilter) fixes typos(again)
+* 233a31a (rtc/PlaneRemover) adds a new component, PlaneRemover
+* 26f2f09 (rtc/SORFilter) fixes typos
+* c5a8ee5 (rtc/TorqueFilter) Modified debug message position for tf params
+* 9c13ee2 (rtc/TorqueFilter) Added timestamp to tf.rtc:tauOut and modified method to deal with input error3e Modified and supressed error messages for TorqueFilter
+* de0b63e (rtc/TorqueFilter) Modified and supressed error messages for TorqueFilter
+* 6ebcb7b (rtc/TorqueController) Supress error message by debugLevel and output qRefIn to qRefOut when torque controller does not work due to some fault of input.
+* d3a7750 (rtc/PCDLoader) removes backup files
+* eafe5f5 (rtc/PCDLoader) adds a new component, PCDLoader
+
 * Contributors: Kei Okada, Shunichi Nozawa
 
 315.2.1 (2014-05-12)
