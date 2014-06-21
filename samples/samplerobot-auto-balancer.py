@@ -80,8 +80,10 @@ if __name__ == '__main__':
     time.sleep(1)
     hcf.abc_svc.goStop()
     #   3. setFootSteps
-    # abc_svc.setFootSteps([AutoBalancerService.Footstep([0,-0.045,0], [1,0,0,0], ":rleg"), AutoBalancerService.Footstep([0,0.045,0], [1,0,0,0], ":lleg")])
-    # abc_svc.waitFootSteps()
+    hcf.abc_svc.setFootSteps([OpenHRP.AutoBalancerService.Footstep([0,-0.09,0], [1,0,0,0], ":rleg"), OpenHRP.AutoBalancerService.Footstep([0,0.09,0], [1,0,0,0], ":lleg")])
+    hcf.abc_svc.waitFootSteps()
+    hcf.abc_svc.setFootSteps([OpenHRP.AutoBalancerService.Footstep([0,-0.09,0], [1,0,0,0], ":rleg"), OpenHRP.AutoBalancerService.Footstep([0.15,0.09,0], [1,0,0,0], ":lleg"), OpenHRP.AutoBalancerService.Footstep([0.3,-0.09,0], [1,0,0,0], ":rleg"), OpenHRP.AutoBalancerService.Footstep([0.3,0.09,0], [1,0,0,0], ":lleg")])
+    hcf.abc_svc.waitFootSteps()
     #   4. getGaitGeneratorParam
     ret = hcf.abc_svc.getGaitGeneratorParam()
     if ret[0]:
@@ -90,6 +92,7 @@ if __name__ == '__main__':
     ret[1].default_step_time = 0.7
     ret[1].default_step_height = 0.15
     ret[1].default_double_support_ratio = 0.4
+    hcf.abc_svc.setGaitGeneratorParam(ret[1])
     ret = hcf.abc_svc.getGaitGeneratorParam()
     if ret[0] and ret[1].default_step_time == 0.7 and ret[1].default_step_height == 0.15 and ret[1].default_double_support_ratio == 0.4:
         print "setGaitGeneratorParam() => OK"
