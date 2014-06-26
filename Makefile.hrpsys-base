@@ -33,6 +33,7 @@ ifneq ($(strip $(GIT_PATCH)),)
 	touch rospack_nosubdirs
 	touch patched
 endif
+	rm -f build/hrpsys-base/CMakeCache.txt
 	@echo "compile hrpsys-base ... "
 	@echo "                 PATH=$(PATH)"
 	@echo "                 INSTALL_DIR=$(INSTALL_DIR)"
