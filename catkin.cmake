@@ -172,14 +172,9 @@ endif(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
 catkin_package(
 )
 
-## sample/samplerobots
 set(ENV{PKG_CONFIG_PATH} ${CATKIN_DEVEL_PREFIX}/lib/pkgconfig:$ENV{PKG_CONFIG_PATH})
 execute_process(COMMAND pkg-config openhrp3.1   --variable=idl_dir      OUTPUT_VARIABLE hrp_idldir   OUTPUT_STRIP_TRAILING_WHITESPACE)
 get_filename_component(OPENHRP3_SAMPLE_DIR "${hrp_idldir}/../sample" ABSOLUTE)
-configure_file(${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.conf.in ${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.conf)
-configure_file(${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.xml.in  ${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.xml)
-configure_file(${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.RobotHardware.conf.in
-               ${PROJECT_SOURCE_DIR}/samples/samplerobot/SampleRobot.RobotHardware.conf)
 
 # #
 install(
@@ -237,7 +232,7 @@ install(CODE
    endif()
    execute_process(COMMAND echo \"                  ${CATKIN_DEVEL_PREFIX} -> ${CMAKE_INSTALL_PREFIX}\")
    file(GLOB _conf_files \"\$ENV{DISTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/share/hrpsys/samples/*/*.*\")
-   file(GLOB _sample_files \"\$ENV{DISTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/samples/samplerobot/*.*\")
+   file(GLOB _sample_files \"\$ENV{DISTDIR}/${CMAKE_INSTALL_PREFIX}/${CATKIN_PACKAGE_SHARE_DESTINATION}/samples/SampleRobot/*.*\")
    foreach(_conf_file \${_conf_files} \${_sample_files})
      execute_process(COMMAND echo \"fix \${_conf_file}\")
      if (EXISTS ${openhrp3_SOURCE_DIR})

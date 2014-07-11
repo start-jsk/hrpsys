@@ -12,7 +12,10 @@
   <env name="ORBgiopMaxMsgSize" value="2147483648" />
   <arg name="corbaport" default="15005" />
   <arg name="GUI" default="true" />
-  <env name="ROS_HOME" value="$(find hrpsys)/samples/samplerobot" />
+  <arg name="CONTROLLER_PERIOD" default="500" />
+  <arg name="CONF_FILE" default="$(find hrpsys)/share/hrpsys/samples/SampleRobot/SampleRobot.$(arg CONTROLLER_PERIOD).conf" />
+  <arg name="PROJECT_FILE" default="$(find hrpsys)/share/hrpsys/samples/SampleRobot/SampleRobot.$(arg CONTROLLER_PERIOD).xml" />
+  <env name="ROS_HOME" value="$(find hrpsys)/share/hrpsys/samples/SampleRobot" />
   <!-- END:common setting -->
 
   <arg unless="$(arg GUI)" name="hrpsys_gui_args" value="-endless -realtime -nodisplay" />
@@ -25,7 +28,19 @@
         args="-ORBInitRef NameService=corbaloc:iiop:localhost:$(arg corbaport)/NameService" output="screen"/>
 
   <node name="hrpsys" pkg="hrpsys" type="hrpsys-simulator"
-        args='$(find hrpsys)/samples/samplerobot/SampleRobot.xml -o manager.is_master:YES -o naming.formats:%n.rtc -o exec_cxt.periodic.rate:1000000 -o manager.shutdown_onrtcs:NO -o manager.modules.load_path:$(find hrpsys)/lib -o manager.modules.preload:HGcontroller.so -o manager.components.precreate:HGcontroller -o exec_cxt.periodic.type:SynchExtTriggerEC -f $(find hrpsys)/samples/samplerobot/SampleRobot.conf -o "example.RobotHardware.config_file:$(find hrpsys)/samples/samplerobot/SampleRobot.RobotHardware.conf" -o "example.SequencePlayer.config_file:$(find hrpsys)/samples/samplerobot/SampleRobot.conf" -o "example.StateHolder.config_file:$(find hrpsys)/samples/samplerobot/SampleRobot.conf" -o "example.ForwardKinematics.config_file:$(find hrpsys)/samples/samplerobot/SampleRobot.conf" -o "example.AutoBalancer.config_file:$(find hrpsys)/samples/samplerobot/SampleRobot.conf" -o "example.StateHolder.config_file:$(find hrpsys)/samples/samplerobot/SampleRobot.conf" -o "example.KalmanFilter.config_file:$(find hrpsys)/samples/samplerobot/SampleRobot.conf" -o "example.Stabilizer.config_file:$(find hrpsys)/samples/samplerobot/SampleRobot.conf" -o "example.RemoveForceSensorLinkOffset.config_file:$(find hrpsys)/samples/samplerobot/SampleRobot.conf" -o "corba.nameservers:localhost:$(arg corbaport)" $(arg hrpsys_gui_args)'
+        args='$(arg PROJECT_FILE) -o manager.is_master:YES -o naming.formats:%n.rtc -o exec_cxt.periodic.rate:1000000 -o manager.shutdown_onrtcs:NO -o manager.modules.load_path:$(find hrpsys)/lib
+              -o manager.modules.preload:HGcontroller.so -o manager.components.precreate:HGcontroller -o exec_cxt.periodic.type:SynchExtTriggerEC -f $(arg CONF_FILE)
+              -o "example.RobotHardware.config_file:$(find hrpsys)/share/hrpsys/samples/SampleRobot/SampleRobot.RobotHardware.$(arg CONTROLLER_PERIOD)conf"
+              -o "example.SequencePlayer.config_file:$(arg CONF_FILE)"
+              -o "example.StateHolder.config_file:$(arg CONF_FILE)"
+              -o "example.ForwardKinematics.config_file:$(arg CONF_FILE)"
+              -o "example.AutoBalancer.config_file:$(arg CONF_FILE)"
+              -o "example.StateHolder.config_file:$(arg CONF_FILE)"
+              -o "example.KalmanFilter.config_file:$(arg CONF_FILE)"
+              -o "example.Stabilizer.config_file:$(arg CONF_FILE)"
+              -o "example.RemoveForceSensorLinkOffset.config_file:$(arg CONF_FILE)"
+              -o "corba.nameservers:localhost:$(arg corbaport)"
+              $(arg hrpsys_gui_args)'
         output="screen"  cwd="node" />
 
 </launch>
