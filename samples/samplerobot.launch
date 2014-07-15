@@ -39,6 +39,7 @@
               -o "example.KalmanFilter.config_file:$(arg CONF_FILE)"
               -o "example.Stabilizer.config_file:$(arg CONF_FILE)"
               -o "example.RemoveForceSensorLinkOffset.config_file:$(arg CONF_FILE)"
+              -o "example.ImpedanceController.config_file:$(arg CONF_FILE)"
               -o "corba.nameservers:localhost:$(arg corbaport)"
               $(arg hrpsys_gui_args)'
         output="screen"  cwd="node" />
