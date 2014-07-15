@@ -2,6 +2,44 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Adjusted to OpenRTM 1.1.1
+* use OCTOMAP_LIBRARY_DIRS instead of OCTOMAP_DIR, Fix #258
+* Use boost library for copysign because copysign in cmath only can be used in C++11 later
+* samplerobot
+  * Add example for impedancecontroller rtc. 
+  * Add examples for samplerobot by copying from start-jsk/hrpsys/samples discussed in https://github.com/fkanehiro/hrpsys-base/issues/240. 
+  * Add setFootSteps examples. 
+  * Add samples for DataLogger and Stabilizer.
+  * Add example for impedancecontroller rtc
+* (JointPathEx.*, AutoBalancer, Stabilizer, ImpedanceController) : Remove solveLimbIK and use calcInverseKinematics2Loop
+* (samplerobot_auto_balancer.py, AutoBalancer.cpp) Fix overwriting of target foot coords, add example to check non-default stride stopping, and check RECTANGLE swing orbit
+* JointPathEx.*
+  * Move nullspace codes to reduce difference between calcInverseKinematics2Loop and solveLimbIK. 
+  * Remove unnecessary transition_count and resetting of nullspace vector. 
+  * Move nullspace codes to reduce difference between calcInverseKinematics2Loop and solveLimbIK.
+* hrpsys_config.py
+  * Add readDigitalOutput.
+  * Add connection for st qCurrent. 
+  * Add comment upon setTargetPose IK failure. 
+  * Add logger connection for walking RTCs. 
+  Use Group to find eef name. PEP8 improvement.
+* Stabilizer.*
+  * Add new stabilizer control law (currently not enabled). 
+  * Use :end_effector instead of link origin in IK and fix mode transition.
+  * Add getParameter function for stabilizer parameter
+* create_changelog.sh
+  * Add script for changelog from subdirectory information (discussed in `jsk-ros-pkg/jsk_roseus#134 <https://github.com/jsk-ros-pkg/jsk_roseus/issues/134>`_)
+* GaitGenerator.*
+  * Fix bug of swing foot calculation and add reset orbit
+  * Support rectangle foot swing orbit
+* (AutoBalancerService.idl, AutoBalancer.*, GaitGenerator.*, testGaitGenerator) : Enable to configure swing orbit type
+* (TorqueController) Added TwoDofControllerDynamicsModel option to initialize process. Use dynamic model based on equation of motion.
+* Fixed default tauMax from model. climit -> climit*gearRatio*torqueConst
+* Modified m_loop type int -> long long
+* Contributors: Kei Okada, Shunichi Nozawa
+
 315.2.2 (2014-06-17)
 --------------------
 * (catkin.cmake) add code to check if hrpsys is installed correctly
