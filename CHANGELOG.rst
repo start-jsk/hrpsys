@@ -2,8 +2,8 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+315.2.3 (2014-07-28)
+--------------------
 * Adjusted to OpenRTM 1.1.1
 * use OCTOMAP_LIBRARY_DIRS instead of OCTOMAP_DIR, Fix #258
 * Use boost library for copysign because copysign in cmath only can be used in C++11 later
