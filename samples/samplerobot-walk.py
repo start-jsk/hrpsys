@@ -8,46 +8,22 @@
 
 """
 
-pkg = 'hrpsys'
-import imp
+import imp, sys, os
+
+# set path to hrpsys to use HrpsysConfigurator
 try:
-    imp.find_module(pkg)
-except:
+    imp.find_module('hrpsys') # catkin installed
+    sys.path.append(imp.find_module('hrpsys')[1])
+except: # rosbuild installed
     import roslib
-    roslib.load_manifest(pkg)
+    roslib.load_manifest('hrpsys')
 
-from hrpsys.hrpsys_config import *
-import OpenHRP
+sys.path.append(os.path.dirname(os.path.abspath(__file__))+'/../share/hrpsys/samples/SampleRobot/') # set path to SampleRobot
 
-def getRTCList ():
-    return [
-        ['seq', "SequencePlayer"],
-        ['sh', "StateHolder"],
-        ['fk', "ForwardKinematics"]
-        ]
-
-def init ():
-    global hcf
-    hcf = HrpsysConfigurator()
-    hcf.getRTCList = getRTCList
-    hcf.init ("SampleRobot(Robot)0")
-
-def loadPattern(basename, tm=1.0):
-    hcf.seq_svc.loadPattern(basename, tm)
-    hcf.seq_svc.waitInterpolation()
+import samplerobot_walk
 
 if __name__ == '__main__':
-    init()
-
-    from subprocess import check_output
-    openhrp3_path = check_output(['rospack','find','openhrp3']).rstrip() # for rosbuild
-    PKG_CONFIG_PATH=""
-    if os.path.exists(os.path.join(openhrp3_path, "bin")) :
-        PKG_CONFIG_PATH='PKG_CONFIG_PATH=%s/lib/pkgconfig:$PKG_CONFIG_PATH'%(openhrp3_path)
-
-    cmd = "%s pkg-config openhrp3.1 --variable=idl_dir"%(PKG_CONFIG_PATH)
-    os.path.join(check_output(cmd, shell=True).rstrip(), "../sample/controller/SampleController/etc/Sample")
-    loadPattern(os.path.join(check_output(cmd, shell=True).rstrip(), "../sample/controller/SampleController/etc/Sample"))
+    samplerobot_walk.demo()
 
 ## IGNORE ME: this code used for rostest
 if [s for s in sys.argv if "--gtest_output=xml:" in s] :

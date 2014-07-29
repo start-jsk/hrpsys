@@ -3,10 +3,11 @@
 """
  this is example file for SampleRobot robot
 
- $ roslaunch hrpsys samplerobot.launch
- $ rosrun    hrpsys samplerobot-data-logger.py
+ $ roslaunch hrpsys samplerobot.launch CONTROLLER_PERIOD:=200
+ $ rosrun    hrpsys samplerobot-impedance-controller.py
 
 """
+
 import imp, sys, os
 
 # set path to hrpsys to use HrpsysConfigurator
@@ -19,15 +20,15 @@ except: # rosbuild installed
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__))+'/../share/hrpsys/samples/SampleRobot/') # set path to SampleRobot
 
-import samplerobot_data_logger
+import samplerobot_impedance_controller
 
 if __name__ == '__main__':
-    samplerobot_data_logger.demo()
+    samplerobot_impedance_controller.demo()
 
 ## IGNORE ME: this code used for rostest
 if [s for s in sys.argv if "--gtest_output=xml:" in s] :
     import unittest, rostest
-    rostest.run('hrpsys', 'samplerobot_data_logger', unittest.TestCase, sys.argv)
+    rostest.run('hrpsys', 'samplerobot_impedance_controller', unittest.TestCase, sys.argv)
 
 
 
