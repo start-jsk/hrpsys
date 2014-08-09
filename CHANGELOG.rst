@@ -2,8 +2,8 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+315.2.4 (2014-08-10)
+--------------------
 * (AutoBalancer.*) : Add data port for acceleration reference which can be used in KalmanFilter.cpp
 * (AutoBalancer*) : Use function and variable names. Use TargetParameter and CurrentParmeter
 * (AutoBalancer.*, Stabilizer.*) : Remove duplicate codes for transition_smooth_gain
