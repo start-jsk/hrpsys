@@ -2,6 +2,39 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* (AutoBalancer.*) : Add data port for acceleration reference which can be used in KalmanFilter.cpp
+* (AutoBalancer*) : Use function and variable names. Use TargetParameter and CurrentParmeter
+* (AutoBalancer.*, Stabilizer.*) : Remove duplicate codes for transition_smooth_gain
+* (Autobalancer.*) : Remove unused codes and use is_legged_robot flag
+* (hrpsys_config.py) : Connect accRef from abc instead of seq. Note that connection from seq at previous r
+* (hrpsys_config, Stabilzier, AutoBalancer) : Use contactStates in Stabilizer to specify single support ph
+* (hrpsys_config.py, Stabilizer.*) : Add out data ports for Stabilizer debug
+* (KalmanFilter.cpp) : Use accRef compensation
+* supports SLIDE_JOINT in GLlink::setQ()
+* (PDcontroller,...) : Add PD controller and examples
+* (samplerobot*.py) : Add print message and comments to samples, remove direct writing of getRTCList, and 
+* (samplerobot*, samples/SampleRobot/CMakeLists.txt) : Use .in file to specify openhrp3 directory for sample1.wrl model
+* (samplerobot.launch) : Add conf_file setting to samplerobot.launch by copying hrpsys_tools/hrpsys/hrpsys.launch setting
+* (samplerobot-impedance-controller.py) : Add impedancecontroller example
+* (Stabilizer) : Fix transition between MODE_AIR, MODE_IDLE, and MODE_ST. Set MODE_AIR if startStabilizer 
+* (Stabilizer) : Fix USE_IMU_STATEFEEDBACK to USE_EEFM_STABILIZER for switching stabilizer algorithm and f
+* (Stabilizer.cpp) : Add LPF for ground contact checking
+* (Stabilizer.cpp) : Fix transition between st ON mode and st OFF mode
+* (Stabilizer.cpp) : Rotate robot around COG in rpy control
+* (Stabilizer.cpp) : Support rotational walking by fixing ref force and ref moment coordinates
+* (Stabilizer.*) : Update calculation of actual and reference values for Stabilizer
+* (Stabilizer.cpp) : Check legged robot or not
+* (Stabilizer.*) : Add getActualParameters and update to use it
+* (Stabilizer.*) : Update member variables (rename and remove)
+* (StabilizerService.idl, Stabilizer.*) : Fix idl to specify zmp delay time constant and auxiliary zmp inp
+* (Sample6dofRobot) : Add sample6dofrobot VRML which has 3 slide joints and 3 rotate joints. Add example f
+* RangeNoiseMixer added
+* rtc/DataLogger/DataLogger.cpp rtc/DataLogger/DataLogger.h: remove needless variable tm from member metho
+* (catkin.cmake, CMakeLists, samples/samplerobot*) : Move samplerobot examples to hrpsys-base https://github.com/fkanehiro/hrpsys-base/pull/252
+* Contributors: Shunichi Nozawa, Kunio Kojima, Isaac IY Saito
+
 315.2.3 (2014-07-28)
 --------------------
 * Adjusted to OpenRTM 1.1.1
