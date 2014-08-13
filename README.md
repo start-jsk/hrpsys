@@ -30,11 +30,20 @@ Steps:
  2. Send a pull request to update `start-jsk/hrpsys/Makefile.hrpsys-base <https://github.com/start-jsk/hrpsys/blob/master/Makefile.hrpsys-base>`_. `Example2 <https://github.com/start-jsk/hrpsys/pull/88/files>`_.
  3. Send a pull request to update `start-jsk/hrpsys/changelog.rst <https://github.com/start-jsk/hrpsys/blob/master/changelog.rst>`_.
 
-  3-1. Use this script [generate_changelog_upstream_] to copy commit messages from upstream `fkanehiro/hrpsys-base`.
+  3-1. Use this script [generate_changelog_upstream_] to copy commit messages from upstream `fkanehiro/hrpsys-base`. A file should be created under `/tmp`.
 
   3-2. Summarize commit messages into user-meaningful content (`discussion <https://github.com/start-jsk/hrpsys/pull/99#issuecomment-49596002>`_). 
 
-  3-3. (Rare) If there's an update in `ROS repository (start-jsk/hrpsys) <https://github.com/start-jsk/hrpsys/blob/master/CHANGELOG.rst>`_, add change logs into the one created in 3-2. Maybe use `catkin_generate_changelog` command to auto-generate it, and manually merge. 
+  3-3. To include updates in `ROS repository (start-jsk/hrpsys) <https://github.com/start-jsk/hrpsys/blob/master/CHANGELOG.rst>`_, add change logs into the one created in 3-2 by following.
+
+     3-3-1. Generate changelog by a command from `catkin`:
+
+     ::
+
+       $ roscd hrpsys
+       $ catkin_generate_changelog
+
+     3-3-2. Open a generated/updated `CHANGELOG.rst` file. Then manually merge with the artifact from 3-1.
 
  4. After here follow the normal release manner: Update tags and `package.xml` by using `catkin_prepare_release`.
 
@@ -62,17 +71,11 @@ Generate changelog from the upstream
   $ catkin_make     (this takes minutes depending on your machine power and internet connection)
   $ source devel/setup.bash
 
-3. Move to the cloned `hrpsys` directory:
+3. Run the command `create_changelog.sh`:
 
 ::
 
-  $ roscd hrpsys
-
-4. Run the command `create_changelog.sh`:
-
-::
-
-  $ ./create_changelog.sh
+  $ rosrun hrpsys create_changelog.sh
 
 
 .. _1: https://github.com/start-jsk/hrpsys/blob/master/package.xml
