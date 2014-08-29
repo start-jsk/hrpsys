@@ -4,7 +4,7 @@ INSTALL_DIR ?= ${CURDIR}
 GIT_DIR = build/hrpsys-base-source
 PATCH_DIR = $(CURDIR)
 GIT_URL = https://github.com/fkanehiro/hrpsys-base.git
-GIT_REVISION = 315.2.4
+GIT_REVISION = 315.2.5
 GIT_PATCH   =  ${PATCH_DIR}/patch/opencv2.patch
 #if arch
 ifeq (,$(wildcard /etc/debian_version)) #if not debian_version exists
