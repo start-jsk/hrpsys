@@ -2,6 +2,48 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
+* bump version to 315.2.5
+* (sample6dofrobot*) : Add wrapper for sample6dofrobot examples added in https://github.com/fkanehiro/hrpsys-base/pull/281
+* Contributors: Kei Okada, Shunichi Nozawa
+
+* .travis.yml, README.md
+  * 2014-08-28 84fd5b3 (hrpsys-base.git) replaces secure line and branch name(ghdoc->master)
+  * 2014-08-28 7b02bd9 (hrpsys-base.git) Update README.md
+  * 2014-08-27 9bb642f (hrpsys-base.git) (.travis.sh) add graphbiz to install
+  * 2014-08-26 fad511e (hrpsys-base.git) (.travis.yml) add automatic push to gh-pages
+  * 2014-08-27 cb4527f (hrpsys-base.git) use CPython as default python and add hrpsys_config.py
+* Stabilizer
+  * 2014-08-28 1a9b4d8 (hrpsys-base.git) (Stabilizer) : Use force difference control
+  * 2014-08-28 0e80a4d (hrpsys-base.git) (Stabilizer) : Add data port for Stabilizer root pos and rot debugging
+  * 2014-08-16 6a1aaa6 (hrpsys-base.git) (Stabilizer,hrpsys_config.py) : Add debug port for Stabilizer compensation
+  * 2014-08-16 69e0b22 (hrpsys-base.git) (Stabilizer) : Add both foot contact checker and update force z control
+* AutoBalancer, Stabilizer, hrpsys_config.py
+  * 2014-08-28 07a1634 (hrpsys-base.git) (AutoBalancer, Stabilizer, hrpsys_config.py) : Add data port for swing and support period remain times and connect it between abc and st
+  * 2014-08-15 29bfe86 (hrpsys-base.git) (AutoBalancer, GaitGenerator, Stabilizer, sample) : Fix end effector name, e.g., :rarm => rarm. This change is based on JointGroup name discussed in https://github.com/fkanehiro/hrpsys-base/issues/232
+* hrpsys_config.py / rtm.py
+  * 2014-08-24 b57bb6e (hrpsys-base.git) (hrpsys py) move api doc for some methods from downstream.
+  * 2014-08-20 94e0cfc (hrpsys-base.git) (rtm.py) Error message minor improvement
+  * 2014-08-19 bb119e3 (hrpsys-base.git) (hrpsys_config.py) : Enable to use RMFO on robots without imu. Connect RPY port only if it exists.
+  * 2014-08-18 eb0a5f7 (hrpsys-base.git) change list of list of str
+  * 2014-08-18 7b966a1 (hrpsys-base.git) fix sphinx syntax
+  * 2014-08-18 43d6761 (hrpsys-base.git) update docstrings of setTargetPose and setTargetPoseRelative
+  * 2014-08-18 32f053a (hrpsys-base.git) rename @type names to match method arguments
+  * 2014-08-18 12bfb8a (hrpsys-base.git) use 'list of ...' instead of '[...]' to describe @type/@rtype
+* AverageFilter
+  * 2014-08-17 f63f927 (hrpsys-base.git) uses round instead of floor
+  * 2014-08-15 66865f8 (hrpsys-base.git) adds a new component, AverageFilter
+* samplerobot_impedance_controller
+  * 2014-08-15 a9188e5 (hrpsys-base.git) (samplerobot_impedance_controller) : Add set ref force and moment example for impedance controller
+* KalmanFilter
+  * 2014-08-14 88e56bc (hrpsys-base.git) (KalmanFilter) : Inhibit debug  print in KalmanFilter.h
+  * 2014-08-14 488715b (hrpsys-base.git) (KalmanFilter) : Add DEBUG to control printing of KalmanFilter
+  * 2014-08-11 48a9d17 (hrpsys-base.git) update KalmanFilter. KF -> EKF and RPY -> Quaternion
+* FowradKinematics
+  * 2014-08-14 7bf7b3e (hrpsys-base.git) enable to set reference frame in get{Reference,Current}{Pose,Position,Rotation,RPY}, see #297
+
 315.2.4 (2014-08-10)
 --------------------
 * (AutoBalancer.*) : Add data port for acceleration reference which can be used in KalmanFilter.cpp
