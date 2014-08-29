@@ -33,7 +33,7 @@ do
     shift
 done
 
-LATEST_DATE=$(grep -m1 .\\.*\\. $TARGET_DIRECTORY/CHANGELOG.rst | cut -d\( -f2 | cut -d\) -f1)
+LATEST_DATE=$(grep -m1 .\\.*\\. `rospack find hrpsys`/CHANGELOG.rst | cut -d\( -f2 | cut -d\) -f1)
 # LATEST_DATE="2014-05-30" # for debug
 
 echo "generate changelog"
