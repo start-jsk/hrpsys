@@ -1,7 +1,10 @@
+========================================================================================================================
 Introduction  [![Build Status](https://travis-ci.org/start-jsk/hrpsys.png)](https://travis-ci.org/start-jsk/hrpsys)
---------------------------------------------------------------------------------------------------------------------------
+========================================================================================================================
 
 An OpenRTM-aist-based robot controller. This package is the most tailored for humanoid (dual-arm and/or biped) robots for historical reason.
+
+.. contents::
 
 Test Status
 ================
@@ -28,7 +31,7 @@ Steps:
 
  1. Send a pull request to `fkanehiro/hrpsys-base <https://github.com/fkanehiro/hrpsys-base/issues>`_ to update a tag in `CMakeLists.txt <https://github.com/fkanehiro/hrpsys-base/blob/master/CMakeLists.txt>`_. `Example <https://github.com/fkanehiro/hrpsys-base/pull/231>`_. This way community will decide if we're ready for the next release.
  2. Send a pull request to update `start-jsk/hrpsys/Makefile.hrpsys-base <https://github.com/start-jsk/hrpsys/blob/master/Makefile.hrpsys-base>`_. `Example2 <https://github.com/start-jsk/hrpsys/pull/88/files>`_.
- 3. Send a pull request to update `start-jsk/hrpsys/changelog.rst <https://github.com/start-jsk/hrpsys/blob/master/changelog.rst>`_.
+ 3. Send a pull request to update `start-jsk/hrpsys/CHANGELOG.rst <https://github.com/start-jsk/hrpsys/blob/master/CHANGELOG.rst>`_.
 
   3-1. Use this script [generate_changelog_upstream_] to copy commit messages from upstream `fkanehiro/hrpsys-base`. A file should be created under `/tmp`.
 
