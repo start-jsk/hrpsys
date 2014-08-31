@@ -52,11 +52,19 @@ class TestHrpsysHostname(unittest.TestCase):
 
     @unittest.expectedFailure
     def test_X_unknown(self):
-        self.check_initCORBA('unknown')
+        try:
+            self.check_initCORBA('unknown')
+        except SystemExit as e:
+            print "[This is Expected Failure]"
+            print str(e.message)
 
     @unittest.expectedFailure
     def test_X_123_45_67_89(self):
-        self.check_initCORBA('123.45.67.89')
+        try:
+            self.check_initCORBA('123.45.67.89')
+        except SystemExit as e:
+            print "[This is Expected Failure]"
+            print str(e.message)
 
 #unittest.main()
 if __name__ == '__main__':
