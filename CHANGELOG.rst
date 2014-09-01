@@ -4,6 +4,11 @@ Changelog for package hrpsys
 
 Forthcoming
 -----------
+* (README.rst) Add TOC., Add doc about the release step. (create_changelog) Tailor to work with hrpsys.
+* (test/test-hostname.py) catch exit with exception(SystemExit)
+* (readme) Clarify tasks in generating and merging changelog.
+* (samplerobot-terrain-walk) : Add wrapper of example in hrpsys-base samplerobot_terrain_walk.py
+* (create_changelog) : Fix bug of hydro Changelog.rst path reported in https://github.com/start-jsk/hrpsys/pull/96/files#r16879095
 
 * bump version to 315.2.5
 * (sample6dofrobot*) : Add wrapper for sample6dofrobot examples added in https://github.com/fkanehiro/hrpsys-base/pull/281
