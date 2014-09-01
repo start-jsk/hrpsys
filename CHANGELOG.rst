@@ -2,8 +2,8 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+315.2.5 (2014-09-02)
+--------------------
 * (README.rst) Add TOC., Add doc about the release step. (create_changelog) Tailor to work with hrpsys.
 * (test/test-hostname.py) catch exit with exception(SystemExit)
 * (readme) Clarify tasks in generating and merging changelog.
