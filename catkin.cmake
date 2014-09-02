@@ -140,7 +140,15 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
   if (_make_failed)
     message(FATAL_ERROR "copy src failed: ${_make_failed}")
   endif(_make_failed)
+  execute_process(
+    COMMAND cmake -E copy_directory ${CMAKE_CURRENT_BINARY_DIR}/build/hrpsys-base-source/ec/ ${PROJECT_SOURCE_DIR}/src/ec
+    RESULT_VARIABLE _make_failed)
+    message("copy ec directory ${CATKIN_DEVEL_PREFIX}/build/hrpsys-base-source/ ${PROJECT_SOURCE_DIR}/src")
+  if (_make_failed)
+    message(FATAL_ERROR "copy src failed: ${_make_failed}")
+  endif(_make_failed)
 
+  # copy samples
   message("openhrp3_SOURCE_DIR=${openhrp3_SOURCE_DIR}")
   message("    openhrp3_PREFIX=${openhrp3_PREFIX}")
   file(GLOB _conf_files "${PROJECT_SOURCE_DIR}/share/hrpsys/samples/*/*.conf" "${PROJECT_SOURCE_DIR}/share/hrpsys/samples/*/*.xml")
