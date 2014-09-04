@@ -2,7 +2,7 @@ EXTRA_CMAKE_FLAGS = -DUSE_ROSBUILD:BOOL=1
 include $(shell rospack find mk)/cmake.mk
 
 ##
-## hrpsys-base (http://hrpsys-base.googlecode.com/svn/trunk/)
+## hrpsys-base (https://github.com/start-jsk/hrpsys)
 ## revision newer than 83 is required
 ##
 CPU_NUM=$(shell grep -c processor /proc/cpuinfo)
