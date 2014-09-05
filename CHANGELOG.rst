@@ -4,80 +4,80 @@ Changelog for package hrpsys
 
 315.2.5 (2014-09-02)
 --------------------
-* (README.rst) Add TOC., Add doc about the release step. (create_changelog) Tailor to work with hrpsys.
+* Stabilizer:
+
+ * Use force difference control
+ * Add data port for Stabilizer root pos and rot debugging
+ * (Stabilizer, hrpsys_config.py) Add debug port for Stabilizer compensation
+ * Add both foot contact checker and update force z control
+* AutoBalancer:
+
+ * Add data port for swing and support period remain times and connect it between abc and st
+ * Fix end effector name, e.g., :rarm => rarm. This change is based on JointGroup name discussed in https://github.com/fkanehiro/hrpsys-base/issues/232
+* KalmanFilter:
+
+ * Inhibit debug  print in KalmanFilter.h
+ * Add DEBUG to control printing of KalmanFilter
+ * KF -> EKF and RPY -> Quaternion
+
+* sample6dofrobot*:
+
+ * Add wrapper for sample6dofrobot examples added in https://github.com/fkanehiro/hrpsys-base/pull/281
+ * Add set ref force and moment example for impedance controller
+ * (terrain-walk) : Add wrapper of example in hrpsys-base samplerobot_terrain_walk.py
+
 * (test/test-hostname.py) catch exit with exception(SystemExit)
 * (readme) Clarify tasks in generating and merging changelog.
-* (samplerobot-terrain-walk) : Add wrapper of example in hrpsys-base samplerobot_terrain_walk.py
 * (create_changelog) : Fix bug of hydro Changelog.rst path reported in https://github.com/start-jsk/hrpsys/pull/96/files#r16879095
+* travis:
 
-* bump version to 315.2.5
-* (sample6dofrobot*) : Add wrapper for sample6dofrobot examples added in https://github.com/fkanehiro/hrpsys-base/pull/281
-* Contributors: Kei Okada, Shunichi Nozawa
+ * add graphbiz to install
+ * add automatic push to gh-pages
+* hrpsys_config.py:
 
-* .travis.yml, README.md
-  * 2014-08-28 84fd5b3 (hrpsys-base.git) replaces secure line and branch name(ghdoc->master)
-  * 2014-08-28 7b02bd9 (hrpsys-base.git) Update README.md
-  * 2014-08-27 9bb642f (hrpsys-base.git) (.travis.sh) add graphbiz to install
-  * 2014-08-26 fad511e (hrpsys-base.git) (.travis.yml) add automatic push to gh-pages
-  * 2014-08-27 cb4527f (hrpsys-base.git) use CPython as default python and add hrpsys_config.py
-* Stabilizer
-  * 2014-08-28 1a9b4d8 (hrpsys-base.git) (Stabilizer) : Use force difference control
-  * 2014-08-28 0e80a4d (hrpsys-base.git) (Stabilizer) : Add data port for Stabilizer root pos and rot debugging
-  * 2014-08-16 6a1aaa6 (hrpsys-base.git) (Stabilizer,hrpsys_config.py) : Add debug port for Stabilizer compensation
-  * 2014-08-16 69e0b22 (hrpsys-base.git) (Stabilizer) : Add both foot contact checker and update force z control
-* AutoBalancer, Stabilizer, hrpsys_config.py
-  * 2014-08-28 07a1634 (hrpsys-base.git) (AutoBalancer, Stabilizer, hrpsys_config.py) : Add data port for swing and support period remain times and connect it between abc and st
-  * 2014-08-15 29bfe86 (hrpsys-base.git) (AutoBalancer, GaitGenerator, Stabilizer, sample) : Fix end effector name, e.g., :rarm => rarm. This change is based on JointGroup name discussed in https://github.com/fkanehiro/hrpsys-base/issues/232
-* hrpsys_config.py / rtm.py
-  * 2014-08-24 b57bb6e (hrpsys-base.git) (hrpsys py) move api doc for some methods from downstream.
-  * 2014-08-20 94e0cfc (hrpsys-base.git) (rtm.py) Error message minor improvement
-  * 2014-08-19 bb119e3 (hrpsys-base.git) (hrpsys_config.py) : Enable to use RMFO on robots without imu. Connect RPY port only if it exists.
-  * 2014-08-18 eb0a5f7 (hrpsys-base.git) change list of list of str
-  * 2014-08-18 7b966a1 (hrpsys-base.git) fix sphinx syntax
-  * 2014-08-18 43d6761 (hrpsys-base.git) update docstrings of setTargetPose and setTargetPoseRelative
-  * 2014-08-18 32f053a (hrpsys-base.git) rename @type names to match method arguments
-  * 2014-08-18 12bfb8a (hrpsys-base.git) use 'list of ...' instead of '[...]' to describe @type/@rtype
-* AverageFilter
-  * 2014-08-17 f63f927 (hrpsys-base.git) uses round instead of floor
-  * 2014-08-15 66865f8 (hrpsys-base.git) adds a new component, AverageFilter
-* samplerobot_impedance_controller
-  * 2014-08-15 a9188e5 (hrpsys-base.git) (samplerobot_impedance_controller) : Add set ref force and moment example for impedance controller
-* KalmanFilter
-  * 2014-08-14 88e56bc (hrpsys-base.git) (KalmanFilter) : Inhibit debug  print in KalmanFilter.h
-  * 2014-08-14 488715b (hrpsys-base.git) (KalmanFilter) : Add DEBUG to control printing of KalmanFilter
-  * 2014-08-11 48a9d17 (hrpsys-base.git) update KalmanFilter. KF -> EKF and RPY -> Quaternion
-* FowradKinematics
-  * 2014-08-14 7bf7b3e (hrpsys-base.git) enable to set reference frame in get{Reference,Current}{Pose,Position,Rotation,RPY}, see #297
+ * Enable to use RMFO on robots without imu. Connect RPY port only if it exists.
+ * move api doc for some methods from downstream.
+ * enable to set reference frame in get{Reference,Current}{Pose,Position,Rotation,RPY}, see #297
+ * use CPython as default python and add hrpsys_config.py
+* adds a new component, AverageFilter
+* Contributors: Kei Okada, Shunichi Nozawa, Isaac IY Saito, Yutaka Kondo
 
 315.2.4 (2014-08-10)
 --------------------
-* (AutoBalancer.*) : Add data port for acceleration reference which can be used in KalmanFilter.cpp
-* (AutoBalancer*) : Use function and variable names. Use TargetParameter and CurrentParmeter
-* (AutoBalancer.*, Stabilizer.*) : Remove duplicate codes for transition_smooth_gain
-* (Autobalancer.*) : Remove unused codes and use is_legged_robot flag
-* (hrpsys_config.py) : Connect accRef from abc instead of seq. Note that connection from seq at previous r
-* (hrpsys_config, Stabilzier, AutoBalancer) : Use contactStates in Stabilizer to specify single support ph
-* (hrpsys_config.py, Stabilizer.*) : Add out data ports for Stabilizer debug
+* AutoBalancer:
+
+ * Add data port for acceleration reference which can be used in KalmanFilter.cpp
+ * Use function and variable names. Use TargetParameter and CurrentParmeter
+ * Remove duplicate codes for transition_smooth_gain
+ * Remove unused codes and use is_legged_robot flag
+* hrpsys_config.py:
+
+ * Connect accRef from abc instead of seq. Note that connection from seq at previous r
+ * Use contactStates in Stabilizer to specify single support ph
+ * Add out data ports for Stabilizer debug
 * (KalmanFilter.cpp) : Use accRef compensation
-* supports SLIDE_JOINT in GLlink::setQ()
 * (PDcontroller,...) : Add PD controller and examples
-* (samplerobot*.py) : Add print message and comments to samples, remove direct writing of getRTCList, and 
-* (samplerobot*, samples/SampleRobot/CMakeLists.txt) : Use .in file to specify openhrp3 directory for sample1.wrl model
-* (samplerobot.launch) : Add conf_file setting to samplerobot.launch by copying hrpsys_tools/hrpsys/hrpsys.launch setting
-* (samplerobot-impedance-controller.py) : Add impedancecontroller example
-* (Stabilizer) : Fix transition between MODE_AIR, MODE_IDLE, and MODE_ST. Set MODE_AIR if startStabilizer 
-* (Stabilizer) : Fix USE_IMU_STATEFEEDBACK to USE_EEFM_STABILIZER for switching stabilizer algorithm and f
-* (Stabilizer.cpp) : Add LPF for ground contact checking
-* (Stabilizer.cpp) : Fix transition between st ON mode and st OFF mode
-* (Stabilizer.cpp) : Rotate robot around COG in rpy control
-* (Stabilizer.cpp) : Support rotational walking by fixing ref force and ref moment coordinates
-* (Stabilizer.*) : Update calculation of actual and reference values for Stabilizer
-* (Stabilizer.cpp) : Check legged robot or not
-* (Stabilizer.*) : Add getActualParameters and update to use it
-* (Stabilizer.*) : Update member variables (rename and remove)
-* (StabilizerService.idl, Stabilizer.*) : Fix idl to specify zmp delay time constant and auxiliary zmp inp
+* samplerobot:
+
+ * Add print message and comments to samples, remove direct writing of getRTCList, and 
+ * Use .in file to specify openhrp3 directory for sample1.wrl model
+ * Add conf_file setting to samplerobot.launch by copying hrpsys_tools/hrpsys/hrpsys.launch setting
+ * Add impedancecontroller example
+* Stabilizer:
+
+ * Fix transition between MODE_AIR, MODE_IDLE, and MODE_ST. Set MODE_AIR if startStabilizer 
+ * Fix USE_IMU_STATEFEEDBACK to USE_EEFM_STABILIZER for switching stabilizer algorithm and f
+ * Add LPF for ground contact checking
+ * Fix transition between st ON mode and st OFF mode
+ * Rotate robot around COG in rpy control
+ * Support rotational walking by fixing ref force and ref moment coordinates
+ * Update calculation of actual and reference values for Stabilizer
+ * Check legged robot or not
+ * Add getActualParameters and update to use it
+ * Update member variables (rename and remove)
+ * Fix idl to specify zmp delay time constant and auxiliary zmp inp
 * (Sample6dofRobot) : Add sample6dofrobot VRML which has 3 slide joints and 3 rotate joints. Add example f
-* RangeNoiseMixer added
+
 * rtc/DataLogger/DataLogger.cpp rtc/DataLogger/DataLogger.h: remove needless variable tm from member metho
 * (catkin.cmake, CMakeLists, samples/samplerobot*) : Move samplerobot examples to hrpsys-base https://github.com/fkanehiro/hrpsys-base/pull/252
 * Contributors: Shunichi Nozawa, Kunio Kojima, Isaac IY Saito
@@ -87,7 +87,7 @@ Changelog for package hrpsys
 * Adjusted to OpenRTM 1.1.1
 * use OCTOMAP_LIBRARY_DIRS instead of OCTOMAP_DIR, Fix #258
 * Use boost library for copysign because copysign in cmath only can be used in C++11 later
-* samplerobot
+* samplerobot:
 
   * Add example for impedancecontroller rtc. 
   * Add examples for samplerobot by copying from start-jsk/hrpsys/samples discussed in https://github.com/fkanehiro/hrpsys-base/issues/240. 
@@ -96,27 +96,25 @@ Changelog for package hrpsys
   * Add example for impedancecontroller rtc
 * (JointPathEx.*, AutoBalancer, Stabilizer, ImpedanceController) : Remove solveLimbIK and use calcInverseKinematics2Loop
 * (samplerobot_auto_balancer.py, AutoBalancer.cpp) Fix overwriting of target foot coords, add example to check non-default stride stopping, and check RECTANGLE swing orbit
-* JointPathEx.*
+* JointPathEx.*:
 
   * Move nullspace codes to reduce difference between calcInverseKinematics2Loop and solveLimbIK. 
   * Remove unnecessary transition_count and resetting of nullspace vector. 
   * Move nullspace codes to reduce difference between calcInverseKinematics2Loop and solveLimbIK.
-* hrpsys_config.py
+* hrpsys_config.py:
 
   * Add readDigitalOutput.
   * Add connection for st qCurrent. 
   * Add comment upon setTargetPose IK failure. 
   * Add logger connection for walking RTCs. 
   * Use Group to find eef name. PEP8 improvement.
-* Stabilizer.*
+* Stabilizer.*:
 
   * Add new stabilizer control law (currently not enabled). 
   * Use :end_effector instead of link origin in IK and fix mode transition.
   * Add getParameter function for stabilizer parameter
-* create_changelog.sh
-
-  * Add script for changelog from subdirectory information (discussed in `jsk-ros-pkg/jsk_roseus#134 <https://github.com/jsk-ros-pkg/jsk_roseus/issues/134>`_)
-* GaitGenerator.*
+* create_changelog.sh: Add script for changelog from subdirectory information (discussed in `jsk-ros-pkg/jsk_roseus#134 <https://github.com/jsk-ros-pkg/jsk_roseus/issues/134>`_)
+* GaitGenerator.*:
 
   * Fix bug of swing foot calculation and add reset orbit
   * Support rectangle foot swing orbit
