@@ -83,3 +83,7 @@ Generate changelog from the upstream
 
 .. _1: https://github.com/start-jsk/hrpsys/blob/master/package.xml
 .. _2: https://github.com/fkanehiro/hrpsys-base
+
+Documentation of RTCs and examples
+-------------------------------------
+[Documentation of RTCs and examples](https://github.com/start-jsk/hrpsys/tree/master/samples/README.md)
