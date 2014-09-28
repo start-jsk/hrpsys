@@ -2,33 +2,40 @@
 Examples
 ========================================================================================================================
 
-This directory is for hrpsys examples.
+This directory is for hrpsys examples.  
+These examples import [hrpsys-base/samples/SampleRobot](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot).  
+To learn more about API, please see [API DOC in hrpsys-base](http://fkanehiro.github.io/hrpsys-base/).
 
 # samplerobot-walk.py
 1. Launch hrpsys-simulator
-```
+
+ ```
 rtmlaunch hrpsys samplerobot.launch
-```
+ ```
 2. python example
-```
+
+ ```
 rosrun hrpsys samplerobot-walk.py
-```
-This example imports 
-[hrpsys-base samplerobot_walk.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_walk.py.in).
+ ```
+ This example imports 
+ [hrpsys-base samplerobot_walk.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_walk.py.in).
 
 # samplerobot-data-logger.py
-DataLogger is hrpsys-base RTC for data logging of hrpsys-base RTCs.  
 1. Launch hrpsys-simulator
-```
+
+ ```
 rtmlaunch hrpsys samplerobot.launch
-```
+ ```
 2. python example
-```
+
+ ```
 rosrun hrpsys samplerobot-data-logger.py
-```
-This example imports 
-[hrpsys-base samplerobot_data_logger.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_data_logger.py.in).  
-3. RTC explanation  
+ ```
+ This example imports 
+ [hrpsys-base samplerobot_data_logger.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_data_logger.py.in).  
+3. RTC explanation 
+ - DataLogger  
+ DataLogger is hrpsys-base RTC for data logging of hrpsys-base RTCs.  
  - Data structure  
  DataLogger has a ring buffer for data. DataLogger stores data to the ring buffer in onExecute function. Users can change ring buffer length through ``maxLength()`` function.  
  - Configure logging data  
@@ -44,18 +51,21 @@ This example imports
 
 
 # samplerobot-remove-force-offset.py
-RemoveForceSensorLinkOffset is hrpsys-base RTC to remove hands or feet from force sensor values.  
 1. Launch hrpsys-simulator
-```
+
+ ```
 rtmlaunch hrpsys samplerobot.launch
-```
+ ```
 2. python example
-```
+
+ ```
 rosrun hrpsys samplerobot-remove-force-offset.py
-```
-This example imports 
-[hrpsys-base samplerobot_remove_force_offset.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_remove_force_offset.py.in).  
+ ```
+ This example imports 
+ [hrpsys-base samplerobot_remove_force_offset.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_remove_force_offset.py.in).  
 3. RTC explanation  
+ - RemoveForceSensorLinkOffset  
+ RemoveForceSensorLinkOffset is hrpsys-base RTC to remove hands or feet from force sensor values.  
  - Original wrench  
  Original wrench are provided by RobotHadware RTC or hrpsys-simulator's RTC, which is SampleRobot(Robot)0.rtc in the above example. 
  Original wrench should be wrench data ports named as sensor names. 
@@ -92,18 +102,21 @@ This example imports
     ```
 
 # samplerobot-impedance-controller.py
-ImpedanceController is hrpsys-base RTC for cartesian impedance control.  
 1. Launch hrpsys-simulator
-```
+
+ ```
 rtmlaunch hrpsys samplerobot.launch
-```
+ ```
 2. python example
-```
+
+ ```
 rosrun hrpsys samplerobot-impedance-controller.py
-```
-This example imports 
-[hrpsys-base samplerobot_impedance_controller.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_impedance_controller.py.in).  
+ ```
+ This example imports 
+ [hrpsys-base samplerobot_impedance_controller.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_impedance_controller.py.in).  
 3. RTC explanation  
+ - ImpedanceController  
+ ImpedanceController is hrpsys-base RTC for cartesian impedance control.  
  - Cartesian impedance control  
  ImpedanceController RTC controls cartesian impedance. 
  This means, ImpedanceController modifies end-effector's position or orientation based on force or moments.  
@@ -121,18 +134,21 @@ This example imports
  it switches to idle mode. 
  
 # samplerobot-auto-balancer.py
-AutoBalancer is hrpsys-base RTC to generate walking pattern and control Center Of Gravity for legged robots.  
 1. Launch hrpsys-simulator
-```
+
+ ```
 rtmlaunch hrpsys samplerobot.launch
-```
+ ```
 2. python example
-```
+
+ ```
 rosrun hrpsys samplerobot-auto-balancer.py
-```
-This example imports 
-[hrpsys-base samplerobot_auto_balancer.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_auto_balancer.py.in).  
+ ```
+ This example imports 
+ [hrpsys-base samplerobot_auto_balancer.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_auto_balancer.py.in).  
 3. RTC explanation  
+ - AutoBalancer  
+ AutoBalancer is hrpsys-base RTC to generate walking pattern and control Center Of Gravity for legged robots.  
  - Feature  
  AutoBalancer RTC has two feature: Center Of Gravity (COG) control and walking pattern generation. 
  - COG control
@@ -176,18 +192,21 @@ This example imports
  AutoBalancer stops to use it after completing walking command.
 
 # samplerobot-stabilizer.py
-Stabilizer is hrpsys-base RTC to maintain full-body balance based on sensor feedback.  
 1. Launch hrpsys-simulator
-```
+
+ ```
 rtmlaunch hrpsys samplerobot.launch
-```
+ ```
 2. python example
-```
+
+ ```
 rosrun hrpsys samplerobot-stabilizer.py
-```
-This example imports 
-[hrpsys-base samplerobot_stabilizer.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_stabilizer.py.in).  
+ ```
+ This example imports 
+ [hrpsys-base samplerobot_stabilizer.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_stabilizer.py.in).  
 3. RTC explanation  
+ - Stabilizer  
+ Stabilizer is hrpsys-base RTC to maintain full-body balance based on sensor feedback.  
  - Feature  
  Stabilizer modifies joint angles to control COG, ZMP, and so on. 
  In ``onExecute``, Stabilizer receives reference joint angles from InPort ``qRef``. 
