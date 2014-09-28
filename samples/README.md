@@ -17,7 +17,7 @@ This example imports
 [hrpsys-base samplerobot_walk.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_walk.py.in).
 
 # samplerobot-data-logger.py
-DataLogger is hrpsys-base RTC for data logging of hrpsys-base RTCs.
+DataLogger is hrpsys-base RTC for data logging of hrpsys-base RTCs.  
 1. Launch hrpsys-simulator
 ```
 rtmlaunch hrpsys samplerobot.launch
@@ -27,7 +27,7 @@ rtmlaunch hrpsys samplerobot.launch
 rosrun hrpsys samplerobot-data-logger.py
 ```
 This example imports 
-[hrpsys-base samplerobot_data_logger.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_data_logger.py.in).
+[hrpsys-base samplerobot_data_logger.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_data_logger.py.in).  
 3. RTC explanation  
  - Data structure  
  DataLogger has a ring buffer for data. DataLogger stores data to the ring buffer in onExecute function. Users can change ring buffer length through ``maxLength()`` function.  
@@ -44,7 +44,7 @@ This example imports
 
 
 # samplerobot-remove-force-offset.py
-RemoveForceSensorLinkOffset is hrpsys-base RTC to remove hands or feet from force sensor values. 
+RemoveForceSensorLinkOffset is hrpsys-base RTC to remove hands or feet from force sensor values.  
 1. Launch hrpsys-simulator
 ```
 rtmlaunch hrpsys samplerobot.launch
@@ -54,7 +54,7 @@ rtmlaunch hrpsys samplerobot.launch
 rosrun hrpsys samplerobot-remove-force-offset.py
 ```
 This example imports 
-[hrpsys-base samplerobot_remove_force_offset.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_remove_force_offset.py.in).
+[hrpsys-base samplerobot_remove_force_offset.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_remove_force_offset.py.in).  
 3. RTC explanation  
  - Original wrench  
  Original wrench are provided by RobotHadware RTC or hrpsys-simulator's RTC, which is SampleRobot(Robot)0.rtc in the above example. 
@@ -92,7 +92,7 @@ This example imports
     ```
 
 # samplerobot-impedance-controller.py
-ImpedanceController is hrpsys-base RTC for cartesian impedance control. 
+ImpedanceController is hrpsys-base RTC for cartesian impedance control.  
 1. Launch hrpsys-simulator
 ```
 rtmlaunch hrpsys samplerobot.launch
@@ -102,7 +102,7 @@ rtmlaunch hrpsys samplerobot.launch
 rosrun hrpsys samplerobot-impedance-controller.py
 ```
 This example imports 
-[hrpsys-base samplerobot_impedance_controller.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_impedance_controller.py.in).
+[hrpsys-base samplerobot_impedance_controller.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_impedance_controller.py.in).  
 3. RTC explanation  
  - Cartesian impedance control  
  ImpedanceController RTC controls cartesian impedance. 
@@ -121,7 +121,7 @@ This example imports
  it switches to idle mode. 
  
 # samplerobot-auto-balancer.py
-AutoBalancer is hrpsys-base RTC to generate walking pattern and control Center Of Gravity for legged robots. 
+AutoBalancer is hrpsys-base RTC to generate walking pattern and control Center Of Gravity for legged robots.  
 1. Launch hrpsys-simulator
 ```
 rtmlaunch hrpsys samplerobot.launch
@@ -131,7 +131,7 @@ rtmlaunch hrpsys samplerobot.launch
 rosrun hrpsys samplerobot-auto-balancer.py
 ```
 This example imports 
-[hrpsys-base samplerobot_auto_balancer.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_auto_balancer.py.in).
+[hrpsys-base samplerobot_auto_balancer.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_auto_balancer.py.in).  
 3. RTC explanation  
  - Feature  
  AutoBalancer RTC has two feature: Center Of Gravity (COG) control and walking pattern generation. 
@@ -176,7 +176,7 @@ This example imports
  AutoBalancer stops to use it after completing walking command.
 
 # samplerobot-stabilizer.py
-Stabilizer is hrpsys-base RTC to maintain full-body balance based on sensor feedback. 
+Stabilizer is hrpsys-base RTC to maintain full-body balance based on sensor feedback.  
 1. Launch hrpsys-simulator
 ```
 rtmlaunch hrpsys samplerobot.launch
@@ -186,7 +186,7 @@ rtmlaunch hrpsys samplerobot.launch
 rosrun hrpsys samplerobot-stabilizer.py
 ```
 This example imports 
-[hrpsys-base samplerobot_stabilizer.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_stabilizer.py.in).
+[hrpsys-base samplerobot_stabilizer.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_stabilizer.py.in).  
 3. RTC explanation  
  - Feature  
  Stabilizer modifies joint angles to control COG, ZMP, and so on. 

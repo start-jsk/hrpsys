@@ -86,4 +86,4 @@ Generate changelog from the upstream
 
 Documentation of RTCs and examples
 -------------------------------------
-[Documentation of RTCs and examples](https://github.com/start-jsk/hrpsys/tree/master/samples/README.md)
+[Documentation of RTCs and examples](https://github.com/start-jsk/hrpsys/tree/master/samples)
