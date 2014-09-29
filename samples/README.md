@@ -134,6 +134,7 @@ rosrun hrpsys samplerobot-impedance-controller.py
  it switches to idle mode. 
  
 # samplerobot-auto-balancer.py
+ <div align="center"><p><img src="http://wiki.ros.org/rtmros_common/Tutorials/WorkingWithEusLisp?action=AttachFile&do=get&target=abc.png" alt="AutoBalancer" title="AutoBalancer" width=300/></p></div>  
 1. Launch hrpsys-simulator
 
  ```
@@ -224,6 +225,7 @@ rosrun hrpsys samplerobot-stabilizer.py
 
 # samplerobot-terrain-walk.py
 1. Example for slope walking  
+ <div align="center"><p><img src="http://wiki.ros.org/rtmros_common/Tutorials/WorkingWithEusLisp?action=AttachFile&do=get&target=slope.png" alt="Slope" title="Slope" width=300/></p></div>  
  1-1. Launch hrpsys-simulator
  ```
 rtmlaunch hrpsys samplerobot.launch CONTROLLER_PERIOD:=200 PROJECT_FILE:=`rospack find hrpsys`/share/hrpsys/samples/SampleRobot/SampleRobot.TerrainFloor.SlopeUpDown.xml
@@ -235,7 +237,8 @@ rosrun hrpsys samplerobot-terrain-walk.py --SlopeUpDown
  This example imports 
  [hrpsys-base samplerobot_terrain_walk.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_terrain_walk.py.in).
 
-2. Example for stair climbing-up  
+2. Example for stair climbing-up
+ <div align="center"><p><img src="http://wiki.ros.org/rtmros_common/Tutorials/WorkingWithEusLisp?action=AttachFile&do=get&target=stairup.png" alt="StairUp" title="StairUp" width=300/></p></div>  
  2-1. Launch hrpsys-simulator
  ```
 rtmlaunch hrpsys samplerobot.launch CONTROLLER_PERIOD:=200 PROJECT_FILE:=`rospack find hrpsys`/share/hrpsys/samples/SampleRobot/SampleRobot.TerrainFloor.StairUp.xml
@@ -248,6 +251,7 @@ rosrun hrpsys samplerobot-terrain-walk.py --StairUp
  [hrpsys-base samplerobot_terrain_walk.py](https://github.com/fkanehiro/hrpsys-base/blob/master/sample/SampleRobot/samplerobot_terrain_walk.py.in).
 
 3. Example for stair climbing-down  
+ <div align="center"><p><img src="http://wiki.ros.org/rtmros_common/Tutorials/WorkingWithEusLisp?action=AttachFile&do=get&target=stairdown.png" alt="StairDown" title="StairDown" width=300/></p></div>  
  3-1. Launch hrpsys-simulator
  ```
 rtmlaunch hrpsys samplerobot.launch CONTROLLER_PERIOD:=200 PROJECT_FILE:=`rospack find hrpsys`/share/hrpsys/samples/SampleRobot/SampleRobot.TerrainFloor.StairDown.xml
