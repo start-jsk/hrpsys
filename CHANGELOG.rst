@@ -2,6 +2,34 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* New Feature
+
+ * Adds PointCloudLogViewer, encords the number of points in point cloud. compiles PointCloudLogViewer only with PCL >= 1.7.
+ * (Stabilizer) : Add leg inside margin to IDL
+ * (KalmanFilter) : Add KalmanFilterParam as struct
+ * Better error handling
+* Fix
+ 
+ * fixes linker error on 12.04amd
+ * Partially reverted to handle Python version < 2.6
+* hrpsys_config
+
+ * Add DataLogger logging for servoState port.
+ * Add playPattern* methods.
+ * (hrpsys_config.py, SequencePlayer, StateHolder) : Add optional data for seq in https://github.com/fkanehiro/hrpsys-base/issues/190
+ * Add and connect logger ports for offset force moment and ref force moment
+* I/F improvement 
+
+ * Added old style parameter functions to TwoDofController for Stabilizer
+ * Modified controller arguments from double valiables to struct parameter.
+* Document update
+
+ * Apply doxygen style, somehow needs exclamation mark (http://stackoverflow.com/questions/7690220/how-to-document-python-function-parameter-types)
+ * Doc improved for many components: AverageFilter, ExtractCameraImage, SequencePlayer, HGcontroller, CaptureController, VideoCapture, PCDLoader, SORFilter, RangeNoiseMixer, CaptureController, JpegEncoder, RGB2Gray, PlaneRemover, AverageFilter. AutoBalancer, Stabilizer, KalmanFilter, RemoveForceSensorLinkOffset, ImpedanceController
+* Contributors: Kei Okada, Shunichi Nozawa, Isaac IY Saito
+
 315.2.5 (2014-09-02)
 --------------------
 * Stabilizer:
