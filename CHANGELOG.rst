@@ -2,8 +2,8 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+315.2.6 (2014-09-30)
+--------------------
 * New Feature
 
  * Adds PointCloudLogViewer, encords the number of points in point cloud. compiles PointCloudLogViewer only with PCL >= 1.7.
