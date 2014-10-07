@@ -151,7 +151,7 @@ if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/installed)
   # copy samples
   message("openhrp3_SOURCE_DIR=${openhrp3_SOURCE_DIR}")
   message("    openhrp3_PREFIX=${openhrp3_PREFIX}")
-  file(GLOB _conf_files "${PROJECT_SOURCE_DIR}/share/hrpsys/samples/*/*.conf" "${PROJECT_SOURCE_DIR}/share/hrpsys/samples/*/*.xml")
+  file(GLOB _conf_files "${PROJECT_SOURCE_DIR}/share/hrpsys/samples/*/*.conf" "${PROJECT_SOURCE_DIR}/share/hrpsys/samples/*/*.xml" "${PROJECT_SOURCE_DIR}/share/hrpsys/samples/*/*.py")
   foreach(_conf_file ${_conf_files})
     if (EXISTS ${openhrp3_SOURCE_DIR})
       message("sed -i s@\$(PROJECT_DIR)@${openhrp3_SOURCE_DIR}/share/OpenHRP-3.1/sample/project@g ${_conf_file}")
