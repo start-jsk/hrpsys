@@ -2,8 +2,8 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+315.2.7 (2014-10-15)
+--------------------
 * New feature
 
  * (AutoBalancer, ImpedanceController) : Enable onDeactivated function for ImpedanceController and AutoBalancer
