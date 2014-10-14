@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # default arguments
-#SUB_DIRECTORIES=`find . -iname hrpsys-base-source`
 SUB_DIRECTORIES="build/hrpsys-base-source"
 TARGET_DIRECTORY=`rospack find hrpsys`; # for rosbuild
 if [ ! -d $TARGET_DIRECTORY/$SUB_DIRECTORIES ]; # for catkin
