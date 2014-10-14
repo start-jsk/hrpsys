@@ -2,6 +2,31 @@
 Changelog for package hrpsys
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* New feature
+
+ * (AutoBalancer, ImpedanceController) : Enable onDeactivated function for ImpedanceController and AutoBalancer
+ * Added getControllerParams method and modified type of Param (struct -> class)
+ * Added type check before use conf params
+* Fixation
+
+ * fix for old pcl
+* Improvement
+
+ * (ImpedanceController, AutoBalancer, Stabilizer) : Move to idling mode if stop() and start() are called. This is discussed in https://github.com/fkanehiro/hrpsys-base/issues/215
+ * print exception when plugin is not found
+ * add document to change timestep
+ * (AutoBalancer) : Add time stamp to abc walking data ports and initialize contactStates
+ * (GaitGenerator, Ratsmatrix) : Remove unused print functions and update print functions to use Eigen IOFormat
+ * (AutoBalancer, ImpedanceController, RemoveForceSensorLinkOffset, Stabilizer) : Update unstable RTCs documentation
+ * (hrpsys_config, DataLogger) : Enable to log contactStates as TimedBooleanSeq
+ * set compile flag -ffloat-store to 32bit system add message for setting collision_loop
+ * removes input dataport "sensorPose" and uses pose in RangeData
+ * Connect q and qRef to ThermoEstimator to estimate joint torque from error
+ * modify OpenHRP-3.1 path due to ROS-fhs layout, see `#128 <https://github.com/start-jsk/hrpsys/issues/128>`_
+* Contributors: Kei Okada, Shunichi Nozawa, Isaac Saito
+
 315.2.6 (2014-09-30)
 --------------------
 * New Feature
