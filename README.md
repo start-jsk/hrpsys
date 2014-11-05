@@ -30,8 +30,8 @@ As a 3rd party package to ROS we need some extra chores to release. Discussed [h
 Steps:
 
  1. Send a pull request to [fkanehiro/hrpsys-base](https://github.com/fkanehiro/hrpsys-base/issues) to update a tag in [CMakeLists.txt](https://github.com/fkanehiro/hrpsys-base/blob/master/CMakeLists.txt). [Example](https://github.com/fkanehiro/hrpsys-base/pull/231). This way community will decide if we're ready for the next release.
- 2. Send a pull request to update [start-jsk/hrpsys/Makefile.hrpsys-base](https://github.com/start-jsk/hrpsys/blob/master/Makefile.hrpsys-base). [Example2](https://github.com/start-jsk/hrpsys/pull/88/files).
- 3. Send a pull request to update [start-jsk/hrpsys/CHANGELOG.rst](https://github.com/start-jsk/hrpsys/blob/master/CHANGELOG.rst).
+ 2. Update [start-jsk/hrpsys/Makefile.hrpsys-base](https://github.com/start-jsk/hrpsys/blob/master/Makefile.hrpsys-base) BEFORE the subsequent steps (otherwise the automation script below won't produce a valid result). [Example2](https://github.com/start-jsk/hrpsys/pull/88/files).
+ 3. Update [start-jsk/hrpsys/CHANGELOG.rst](https://github.com/start-jsk/hrpsys/blob/master/CHANGELOG.rst) by the following steps.
 
   3-1. Use this script [generate_changelog_upstream_] to copy commit messages from upstream `fkanehiro/hrpsys-base`. A file should be created under `/tmp`.
 
@@ -48,7 +48,7 @@ Steps:
 
      3-3-2. Open a generated/updated `CHANGELOG.rst` file. Then manually merge with the artifact from 3-1.
 
- 4. After here follow the normal release manner: Update tags and `package.xml` by using `catkin_prepare_release`.
+ 4. After here follow the normal release manner: Send pull requests for the change above (step 2 and 3). Update tags and `package.xml` by using `catkin_prepare_release`.
 
 Notice that we're sending pull requests to two different repositories; one is the source upstream repository that isn't ROS-dependent, another repository is used to release a DEB using ROS infrastructure.
 
